@@ -1,5 +1,8 @@
 require 'hyper_admin/resource_collection'
+require 'hyper_admin/resource_controller'
 require 'hyper_admin/router'
+
+module Admin; end
 
 module HyperAdmin
   class Application
@@ -12,7 +15,8 @@ module HyperAdmin
     end
 
     def register(resource_class)
-      @resources.add resource_class
+      resource = @resources.add resource_class
+      create_resource_controller resource
     end
 
     def routes(rails_router)
@@ -44,6 +48,16 @@ module HyperAdmin
     def prevent_rails_autoloading_load_paths
       ActiveSupport::Dependencies.autoload_paths -= load_paths
       Rails.application.config.eager_load_paths  -= load_paths
+    end
+
+    def create_resource_controller(resource)
+      ctrl = Class.new HyperAdmin::ResourceController do
+        define_method :resource_class do
+          resource.resource_class
+        end
+      end
+
+      Admin.const_set resource.controller_name, ctrl
     end
   end
 end

@@ -9,7 +9,10 @@ module HyperAdmin
     end
 
     def add(resource_class)
-      @resources[resource_class.model_name] = Resource.new(resource_class)
+      resource = Resource.new(resource_class)
+      @resources[resource_class.model_name] = resource
+
+      resource
     end
 
     def each(&block)

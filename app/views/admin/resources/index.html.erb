@@ -1,0 +1,24 @@
+<h1>All <%= @resource_class.model_name.plural %></h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th><code>to_s</code></th>
+      <th>&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @resources.each do |resource| %>
+      <tr>
+        <td><%= resource.id %></td>
+        <td><%= resource.to_s %></td>
+        <td>
+          <%= link_to "Show", [ :admin, resource ] %>
+          <%= link_to "Edit", [ :edit, :admin, resource ] %>
+          <%= link_to "Destroy", [ :admin, resource ], method: :delete %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
