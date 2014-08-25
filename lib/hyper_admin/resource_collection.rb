@@ -11,5 +11,9 @@ module HyperAdmin
     def add(resource_class)
       @resources[resource_class.model_name] = Resource.new(resource_class)
     end
+
+    def each(&block)
+      @resources.values.each(&block)
+    end
   end
 end

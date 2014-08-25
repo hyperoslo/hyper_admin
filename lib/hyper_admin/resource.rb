@@ -5,5 +5,9 @@ module HyperAdmin
     def initialize(resource_class)
       @resource_class = resource_class
     end
+
+    def resource_name
+      @resource_class.model_name
+    end
   end
 end
