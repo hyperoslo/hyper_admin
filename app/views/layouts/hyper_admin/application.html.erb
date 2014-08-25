@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>HyperAdmin</title>
+
+    <%= stylesheet_link_tag    "hyper_admin/application", media: :all %>
+    <%= javascript_include_tag "hyper_admin/application" %>
+
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+
+    <%= yield %>
+
+  </body>
+</html>
