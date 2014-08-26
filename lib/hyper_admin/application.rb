@@ -1,5 +1,4 @@
 require 'hyper_admin/resource_collection'
-require 'hyper_admin/resource_controller'
 require 'hyper_admin/router'
 
 module Admin; end

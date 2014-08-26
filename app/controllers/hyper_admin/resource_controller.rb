@@ -1,5 +1,5 @@
 module HyperAdmin
-  class ResourceController < ActionController::Base
+  class ResourceController < ApplicationController
     before_action :set_resource_class
     before_action :permit_params, only: [ :create, :update ]
 
