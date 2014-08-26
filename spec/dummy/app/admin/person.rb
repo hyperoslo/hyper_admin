@@ -1,0 +1,1 @@
+HyperAdmin.register Person
