@@ -44,6 +44,11 @@ module HyperAdmin
     end
 
     def destroy
+      @resource = @resource_class.find params[:id]
+
+      @resource.destroy
+
+      redirect_to [ :admin, @resource_class ]
     end
 
     def resource
