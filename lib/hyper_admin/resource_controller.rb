@@ -13,7 +13,7 @@ module HyperAdmin
     end
 
     def new
-      @resource = resource
+      @resource = resource_class.new
       render 'admin/resources/new', layout: layout
     end
 
