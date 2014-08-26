@@ -1,3 +1,5 @@
+require 'jquery-rails'
+
 require 'hyper_admin/engine'
 require 'hyper_admin/application'
 
