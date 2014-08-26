@@ -4,22 +4,22 @@ module HyperAdmin
 
     def index
       @resources = resource_class.all
-      render 'admin/resources/index'
+      render 'admin/resources/index', layout: layout
     end
 
     def show
       @resource = resource
-      render 'admin/resources/show'
+      render 'admin/resources/show', layout: layout
     end
 
     def new
       @resource = resource
-      render 'admin/resources/new'
+      render 'admin/resources/new', layout: layout
     end
 
     def edit
       @resource = resource
-      render 'admin/resources/edit'
+      render 'admin/resources/edit', layout: layout
     end
 
     def create
@@ -43,6 +43,10 @@ module HyperAdmin
 
     def set_resource_class
       @resource_class = resource_class
+    end
+
+    def layout
+      'hyper_admin/application'
     end
   end
 end
