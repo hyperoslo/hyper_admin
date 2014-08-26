@@ -11,7 +11,17 @@
   </head>
   <body>
 
-    <%= yield %>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="/admin">Admin</a>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
 
   </body>
 </html>
