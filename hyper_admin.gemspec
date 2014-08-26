@@ -16,6 +16,7 @@ Gem::Specification.new do |gem|
   gem.test_files = Dir['spec/**/*']
 
   gem.add_dependency 'rails', '~> 4.1'
+  gem.add_dependency 'jquery-rails', '~> 3.1'
 
   gem.add_development_dependency 'coveralls', '~> 0.7'
   gem.add_development_dependency 'factory_girl_rails', '~> 4.4'

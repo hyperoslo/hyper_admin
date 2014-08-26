@@ -21,3 +21,29 @@
 
 en:
   hello: "Hello world"
+
+  activerecord:
+    models:
+      article:
+        one: Blog post
+        other: Blog posts
+
+      person:
+        one: Person
+        other: People
+
+    attributes:
+      common: &common
+        id: ID
+        created_at: Creation date
+        updated_at: Last updated
+
+      article:
+        <<: *common
+        title: Title
+        body: Body text
+
+      person:
+        <<: *common
+        first_name: First name
+        last_name: Last name

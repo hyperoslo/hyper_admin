@@ -1,3 +1,3 @@
 Rails.application.routes.draw do
-  mount HyperAdmin::Engine, at: '/admin'
+  HyperAdmin.routes self
 end

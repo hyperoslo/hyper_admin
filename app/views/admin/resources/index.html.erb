@@ -1,0 +1,39 @@
+<div class="row">
+  <div class="col-xs-12">
+    <header class="page-header">
+      <div class="pull-right">
+        <%= link_to "Create new",[ :new, :admin, @resource_class.model_name.singular_route_key ], class: "btn btn-lg btn-success" %>
+      </div>
+      <h1>All <%= @resource_class.model_name.plural %></h1>
+    </header>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <% @resource_class.attribute_names.each do |attr| %>
+            <th><%= @resource_class.human_attribute_name attr %></th>
+          <% end %>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @resources.each do |resource| %>
+          <tr>
+            <% resource.attributes.values.each do |attr| %>
+              <td><%= attr %></th>
+            <% end %>
+            <td>
+              <%= link_to "Show", [ :admin, resource ] %>
+              <%= link_to "Edit", [ :edit, :admin, resource ] %>
+              <%= link_to "Destroy", [ :admin, resource ], method: :delete %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
