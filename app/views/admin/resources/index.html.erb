@@ -1,24 +1,36 @@
-<h1>All <%= @resource_class.model_name.plural %></h1>
+<div class="row">
+  <div class="col-xs-12">
+    <header class="page-header">
+      <h1>All <%= @resource_class.model_name.plural %></h1>
+    </header>
+  </div>
+</div>
 
-<table>
-  <thead>
-    <tr>
-      <th>ID</th>
-      <th><code>to_s</code></th>
-      <th>&nbsp;</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @resources.each do |resource| %>
-      <tr>
-        <td><%= resource.id %></td>
-        <td><%= resource.to_s %></td>
-        <td>
-          <%= link_to "Show", [ :admin, resource ] %>
-          <%= link_to "Edit", [ :edit, :admin, resource ] %>
-          <%= link_to "Destroy", [ :admin, resource ], method: :delete %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="row">
+  <div class="col-xs-12">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <% @resource_class.attribute_names.each do |attr| %>
+            <th><%= @resource_class.human_attribute_name attr %></th>
+          <% end %>
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @resources.each do |resource| %>
+          <tr>
+            <% resource.attributes.values.each do |attr| %>
+              <td><%= attr %></th>
+            <% end %>
+            <td>
+              <%= link_to "Show", [ :admin, resource ] %>
+              <%= link_to "Edit", [ :edit, :admin, resource ] %>
+              <%= link_to "Destroy", [ :admin, resource ], method: :delete %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
