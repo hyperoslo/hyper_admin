@@ -1,6 +1,7 @@
 module HyperAdmin
   class ResourceController < ActionController::Base
     before_action :set_resource_class
+    before_action :permit_params, only: [ :create, :update ]
 
     def index
       @resources = resource_class.all
@@ -23,6 +24,13 @@ module HyperAdmin
     end
 
     def create
+      @resource = @resource_class.new params[@resource_class.model_name.param_key]
+
+      if @resource.save
+        redirect_to [ :admin, @resource ]
+      else
+        render "admin/resources/new", layout: layout
+      end
     end
 
     def update
@@ -43,6 +51,10 @@ module HyperAdmin
 
     def set_resource_class
       @resource_class = resource_class
+    end
+
+    def permit_params
+      params.permit!
     end
 
     def layout
