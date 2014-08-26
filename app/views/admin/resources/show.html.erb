@@ -1,1 +1,25 @@
-<h1><%= @resource.to_s %></h1>
+<div class="row">
+  <div class="col-xs-12">
+    <header class="page-header">
+      <div class="pull-right">
+        <%= link_to "Edit", [ :edit, :admin, @resource ], class: "btn btn-lg btn-default" %>
+        <%= link_to "Destroy", [ :admin, @resource ], class: "btn btn-lg btn-danger", method: :delete %>
+      </div>
+
+      <h1><%= @resource.to_s %></h1>
+    </header>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12">
+    <div class="well">
+      <dl class="dl-horizontal">
+        <% @resource.attributes.each do |key, value| %>
+          <dt><%= @resource_class.human_attribute_name key %></dt>
+          <dd><%= value %></dd>
+        <% end %>
+      </dl>
+    </div>
+  </div>
+</div>
