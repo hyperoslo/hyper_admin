@@ -15,6 +15,14 @@
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="/admin">Admin</a>
+
+          <ul class="nav navbar-nav">
+            <% @resource_classes.each do |resource_class| %>
+              <li class="<%= "active" if params[:controller] == "admin/#{resource_class.model_name.plural}" %>">
+                <%= link_to resource_class.model_name.human(count: 2), [ :admin, resource_class ] %>
+              </li>
+            <% end %>
+          </ul>
         </div>
       </div>
     </nav>
