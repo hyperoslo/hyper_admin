@@ -21,3 +21,17 @@
 
 en:
   hello: "Hello world"
+
+  activerecord:
+    models:
+      article:
+        one: Blog post
+        other: Blog posts
+
+    attributes:
+      article:
+        id: ID
+        title: Title
+        body: Body text
+        created_at: Creation date
+        updated_at: Last updated
