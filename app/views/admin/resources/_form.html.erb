@@ -8,13 +8,10 @@
       %>
       <% attributes.each do |key, val| %>
         <div class="form-group">
-          <label for="<%= key %>" class="col-sm-2 control-label">
-            <%= resource_class.human_attribute_name key %>
-          </label>
+          <%= form.label key, class: "col-sm-2 control-label" %>
           <div class="col-sm-10">
-            <input type="text" class="form-control" id="<%= key %>"
-              placeholder="<%= resource_class.human_attribute_name key %>"
-              value="<%= val %>">
+            <%= form.text_field key, class: "form-control",
+              placeholder: resource_class.human_attribute_name(key) %>
           </div>
         </div>
       <% end %>
