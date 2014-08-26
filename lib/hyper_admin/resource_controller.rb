@@ -34,6 +34,13 @@ module HyperAdmin
     end
 
     def update
+      @resource = @resource_class.find params[:id]
+
+      if @resource.update params[@resource_class.model_name.param_key]
+        redirect_to [ :admin, @resource ]
+      else
+        render "admin/resources/edit", layout: layout
+      end
     end
 
     def destroy
