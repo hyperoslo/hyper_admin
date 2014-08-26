@@ -1,7 +1,12 @@
 <div class="row">
   <div class="col-xs-12">
     <%= form_for [ :admin, resource ], html: { class: 'form-horizontal' } do |form| %>
-      <% resource.attributes.each do |key, val| %>
+      <%
+        attributes = resource.attributes.delete_if do |k, v|
+          k.to_sym.in? [ :id, :created_at, :updated_at ]
+        end
+      %>
+      <% attributes.each do |key, val| %>
         <div class="form-group">
           <label for="<%= key %>" class="col-sm-2 control-label">
             <%= resource_class.human_attribute_name key %>
