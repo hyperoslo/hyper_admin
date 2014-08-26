@@ -1,6 +1,9 @@
 <div class="row">
   <div class="col-xs-12">
     <header class="page-header">
+      <div class="pull-right">
+        <%= link_to "Create new",[ :new, :admin, @resource_class.model_name.singular_route_key ], class: "btn btn-lg btn-success" %>
+      </div>
       <h1>All <%= @resource_class.model_name.plural %></h1>
     </header>
   </div>
