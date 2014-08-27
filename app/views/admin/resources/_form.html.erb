@@ -1,5 +1,21 @@
 <div class="row">
   <div class="col-xs-12" ng-controller="FormCtrl as formCtrl">
+    <section class="panel panel-danger" ng-if="formCtrl.errors">
+      <div class="panel-heading">
+        <h3 class="panel-title">Errors occurred</h3>
+      </div>
+
+      <div class="panel-body">
+        <div ng-repeat="(attr, messages) in formCtrl.errors">
+          <h4>{{ attr }}</h4>
+
+          <ul>
+            <li ng-repeat="message in messages">{{ message }}</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
     <form class="form-horizontal" name="form"
       ng-init="formCtrl.meta.target='<%= url_for([ :admin, resource ])[1..-1] %>';
         formCtrl.meta.method='<%= resource.new_record? ? "post" : "patch" %>'"
