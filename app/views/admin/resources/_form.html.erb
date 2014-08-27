@@ -7,11 +7,15 @@
         end
       %>
       <% attributes.each do |key, val| %>
-        <div class="form-group">
+        <div class="form-group has-feedback">
           <%= form.label key, class: "col-sm-2 control-label" %>
           <div class="col-sm-10">
             <%= form.text_field key, class: "form-control",
               placeholder: resource_class.human_attribute_name(key) %>
+            <span class="glyphicon glyphicon-remove form-control-feedback"></span>
+            <span class="help-block error">
+              Please ensure that you provide a valid value for this field.
+            </span>
           </div>
         </div>
       <% end %>
