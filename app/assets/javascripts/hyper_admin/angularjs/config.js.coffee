@@ -1,4 +1,4 @@
-angular.module("hyperadmin", [ "ui.router" ])
+angular.module("hyperadmin", [ "restangular", "ui.router" ])
   .config ($httpProvider) ->
     authToken = $("meta[name=\"csrf-token\"]").attr("content")
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
@@ -7,3 +7,6 @@ angular.module("hyperadmin", [ "ui.router" ])
 
   .config ($stateProvider) ->
     window.stateProvider = $stateProvider
+
+  .config (RestangularProvider) ->
+    RestangularProvider.setRequestSuffix '.json'
