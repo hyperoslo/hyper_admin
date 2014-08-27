@@ -27,8 +27,10 @@ module HyperAdmin
       @resource = @resource_class.new params[@resource_class.model_name.param_key]
 
       if @resource.save
+        flash[:success] = "Successfully created #{@resource_class.model_name.singular}."
         redirect_to [ :admin, @resource ]
       else
+        flash.now[:danger] = "Failed to create #{@resource_class.model_name.singular}."
         render "admin/resources/new", layout: layout
       end
     end
@@ -37,8 +39,10 @@ module HyperAdmin
       @resource = @resource_class.find params[:id]
 
       if @resource.update params[@resource_class.model_name.param_key]
+        flash[:success] = "Successfully updated #{@resource_class.model_name.singular}."
         redirect_to [ :admin, @resource ]
       else
+        flash.now[:danger] = "Failed to update #{@resource_class.model_name.singular}."
         render "admin/resources/edit", layout: layout
       end
     end
@@ -48,6 +52,7 @@ module HyperAdmin
 
       @resource.destroy
 
+      flash[:success] = "Successfully destroyed #{@resource_class.model_name.singular}."
       redirect_to [ :admin, @resource_class ]
     end
 
