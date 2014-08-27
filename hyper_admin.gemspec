@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
 
   gem.add_dependency 'angularjs-rails', '~> 1.2'
   gem.add_dependency 'coffee-rails', '~> 4.0'
+  gem.add_dependency 'jbuilder', '~> 1.2'
   gem.add_dependency 'jquery-rails', '~> 3.1'
   gem.add_dependency 'rails', '~> 4.1'
   gem.add_dependency 'sass-rails', '~> 4.0'
