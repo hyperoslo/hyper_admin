@@ -15,11 +15,17 @@ module HyperAdmin
 
     def new
       @resource = resource_class.new
+      @attributes = @resource.attributes.delete_if do |k, v|
+        k.to_sym.in? [ :id, :created_at, :updated_at ]
+      end
       render 'admin/resources/new', layout: layout
     end
 
     def edit
       @resource = resource
+      @attributes = @resource.attributes.delete_if do |k, v|
+        k.to_sym.in? [ :id, :created_at, :updated_at ]
+      end
       render 'admin/resources/edit', layout: layout
     end
 
