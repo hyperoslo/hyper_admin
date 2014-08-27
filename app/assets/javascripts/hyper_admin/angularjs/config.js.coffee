@@ -1,1 +1,1 @@
-angular.module("hyperadmin", [])
+angular.module("hyperadmin", [ "ui.router" ])
