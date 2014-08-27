@@ -3,14 +3,18 @@ module HyperAdmin
     before_action :set_resource_class
     before_action :permit_params, only: [ :create, :update ]
 
+    before_action do
+      self.class.layout ->{ request.xhr? ? false : 'hyper_admin/application' }
+    end
+
     def index
       @resources = resource_class.all
-      render 'admin/resources/index', layout: layout
+      render 'admin/resources/index'
     end
 
     def show
       @resource = resource
-      render 'admin/resources/show', layout: layout
+      render 'admin/resources/show'
     end
 
     def new
@@ -18,7 +22,7 @@ module HyperAdmin
       @attributes = @resource.attributes.delete_if do |k, v|
         k.to_sym.in? [ :id, :created_at, :updated_at ]
       end
-      render 'admin/resources/new', layout: layout
+      render 'admin/resources/new'
     end
 
     def edit
@@ -26,7 +30,7 @@ module HyperAdmin
       @attributes = @resource.attributes.delete_if do |k, v|
         k.to_sym.in? [ :id, :created_at, :updated_at ]
       end
-      render 'admin/resources/edit', layout: layout
+      render 'admin/resources/edit'
     end
 
     def create
@@ -37,7 +41,7 @@ module HyperAdmin
         redirect_to [ :admin, @resource ]
       else
         flash.now[:danger] = "Failed to create #{@resource_class.model_name.singular}."
-        render "admin/resources/new", layout: layout
+        render "admin/resources/new"
       end
     end
 
@@ -49,7 +53,7 @@ module HyperAdmin
         redirect_to [ :admin, @resource ]
       else
         flash.now[:danger] = "Failed to update #{@resource_class.model_name.singular}."
-        render "admin/resources/edit", layout: layout
+        render "admin/resources/edit"
       end
     end
 
@@ -78,10 +82,6 @@ module HyperAdmin
 
     def permit_params
       params.permit!
-    end
-
-    def layout
-      'hyper_admin/application'
     end
   end
 end
