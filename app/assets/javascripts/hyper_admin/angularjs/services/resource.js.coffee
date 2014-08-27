@@ -23,6 +23,7 @@ angular.module("hyperadmin")
             templateUrl: (params) ->
               "/admin/#{resource.plural}/#{params.id}/edit.html"
 
+      # TODO :: Find a better way to navigate to the current state
       $state.go "list_#{@resources[0].plural}"
 
       $rootScope.$emit "resources:states:registered"
