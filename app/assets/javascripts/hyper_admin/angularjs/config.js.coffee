@@ -4,3 +4,6 @@ angular.module("hyperadmin", [ "ui.router" ])
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
     $httpProvider.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
     $httpProvider.defaults.headers.common["Accept"] = "text/html,application/json"
+
+  .config ($stateProvider) ->
+    window.stateProvider = $stateProvider
