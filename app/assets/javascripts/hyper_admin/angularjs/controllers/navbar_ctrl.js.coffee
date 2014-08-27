@@ -1,5 +1,6 @@
 angular.module("hyperadmin")
-  .controller "NavbarCtrl", (Resource) ->
-    @resources = Resource.states()
+  .controller "NavbarCtrl", ($rootScope, Resource) ->
+    $rootScope.$on "resources:states:registered", =>
+      @resources = Resource.menuStates()
 
     this

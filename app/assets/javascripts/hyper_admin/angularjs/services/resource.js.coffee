@@ -1,6 +1,11 @@
 angular.module("hyperadmin")
-  .factory "Resource", ->
-    generateStates = =>
+  .factory "Resource", ($rootScope, $state, Restangular) ->
+    Restangular.all("admin/resource_classes").getList().then (resources) =>
+      @resources = resources
+
+      registerStates()
+
+    registerStates = =>
       @resources.forEach (resource) ->
         stateProvider
           .state "list_#{resource.plural}",
@@ -18,24 +23,13 @@ angular.module("hyperadmin")
             templateUrl: (params) ->
               "/admin/#{resource.plural}/#{params.id}/edit.html"
 
-    getResources = =>
-     @resources = [
-      {
-        label: "Blog posts"
-        singular: "article"
-        plural: "articles"
-      }, {
-        label: "People"
-        singular: "person"
-        plural: "people"
-      }
-    ]
+      $state.go "list_#{@resources[0].plural}"
 
-    states = =>
+      $rootScope.$emit "resources:states:registered"
+
+    menuStates = =>
       @resources.map (resource) ->
         list_state: "list_#{resource.plural}"
-        label: resource.label
+        label: resource.menu_label
 
-    generateStates: generateStates
-    getResources: getResources
-    states: states
+    menuStates: menuStates
