@@ -37,11 +37,9 @@ module HyperAdmin
       @resource = @resource_class.new params[@resource_class.model_name.param_key]
 
       if @resource.save
-        flash[:success] = "Successfully created #{@resource_class.model_name.singular}."
-        redirect_to [ :admin, @resource ]
+        render json: @resource
       else
-        flash.now[:danger] = "Failed to create #{@resource_class.model_name.singular}."
-        render "admin/resources/new"
+        render json: @resource.errors, status: 422
       end
     end
 
@@ -49,11 +47,9 @@ module HyperAdmin
       @resource = @resource_class.find params[:id]
 
       if @resource.update params[@resource_class.model_name.param_key]
-        flash[:success] = "Successfully updated #{@resource_class.model_name.singular}."
-        redirect_to [ :admin, @resource ]
+        render json: @resource
       else
-        flash.now[:danger] = "Failed to update #{@resource_class.model_name.singular}."
-        render "admin/resources/edit"
+        render json: @resource.errors, status: 422
       end
     end
 
@@ -63,7 +59,7 @@ module HyperAdmin
       @resource.destroy
 
       flash[:success] = "Successfully destroyed #{@resource_class.model_name.singular}."
-      redirect_to [ :admin, @resource_class ]
+      respond_with @resource
     end
 
     def resource
