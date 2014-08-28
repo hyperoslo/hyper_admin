@@ -5,7 +5,7 @@ angular.module("hyperadmin")
       method = @meta.method
 
       onError = (response) =>
-        errors = response.data
+        @errors = response.data
 
       onSuccess = (resource) =>
         # Do nothing yet
