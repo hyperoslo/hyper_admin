@@ -57,7 +57,7 @@ module HyperAdmin
       @resource.destroy
 
       flash[:success] = "Successfully destroyed #{@resource_class.model_name.singular}."
-      respond_with @resource
+      head 200
     end
 
     def resource
