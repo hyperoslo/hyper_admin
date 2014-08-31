@@ -34,6 +34,9 @@
             <a ui-sref="edit_{{ indexCtrl.resource_class.singular }}({ id: resource.id })">
               Edit
             </a>
+            <a ui-sref="show_{{ indexCtrl.resource_class.singular }}({ id: resource.id })" data-method="delete">
+              Destroy
+            </a>
           </td>
         </tr>
       </tbody>
