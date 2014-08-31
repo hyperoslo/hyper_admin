@@ -17,6 +17,7 @@ angular.module("hyperadmin")
           .state "new_#{resource.singular}",
             url: "/admin/#{resource.plural}/new"
             templateUrl: "/admin/#{resource.plural}/new.html"
+            controller: "NewCtrl as newCtrl"
             data:
               resource: resource
               mode: "new"
@@ -31,6 +32,7 @@ angular.module("hyperadmin")
             url: "/admin/#{resource.plural}/:id/edit"
             templateUrl: (params) ->
               "/admin/#{resource.plural}/#{params.id}/edit.html"
+            controller: "EditCtrl as editCtrl"
             data:
               resource: resource
               mode: "edit"
