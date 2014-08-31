@@ -1,5 +1,5 @@
 angular.module("hyperadmin")
-  .controller "FormCtrl", ($scope, $state, Restangular) ->
+  .controller "FormCtrl", ($state, Restangular) ->
     @resource_class = $state.current.data.resource
     mode = $state.current.data.mode
 
