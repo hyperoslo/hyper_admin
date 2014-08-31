@@ -11,6 +11,7 @@ angular.module("hyperadmin")
           .state "list_#{resource.plural}",
             url: "/admin/#{resource.plural}"
             templateUrl: "/admin/#{resource.plural}.html"
+            controller: "IndexCtrl as indexCtrl"
             data:
               resource: resource
           .state "new_#{resource.singular}",

@@ -2,9 +2,11 @@
   <div class="col-xs-12">
     <header class="page-header">
       <div class="pull-right">
-        <%= link_to "Create new",[ :new, :admin, @resource_class.model_name.singular_route_key ], class: "btn btn-lg btn-success" %>
+        <a class="btn btn-lg btn-success" ui-sref="new_{{ indexCtrl.resource_class.singular }}">
+          Create new
+        </a>
       </div>
-      <h1>All <%= @resource_class.model_name.plural %></h1>
+      <h1>All {{ indexCtrl.resource_class.plural }}</h1>
     </header>
   </div>
 </div>
