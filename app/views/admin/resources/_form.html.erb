@@ -17,8 +17,6 @@
     </section>
 
     <form class="form-horizontal" name="form"
-      ng-init="formCtrl.meta.target='<%= url_for([ :admin, resource ])[1..-1] %>';
-        formCtrl.meta.method='<%= resource.new_record? ? "post" : "patch" %>'"
       ng-submit="formCtrl.submit()" novalidate>
 
       <% attributes.each do |key, val| %>

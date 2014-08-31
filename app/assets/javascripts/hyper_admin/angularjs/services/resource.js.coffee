@@ -11,17 +11,27 @@ angular.module("hyperadmin")
           .state "list_#{resource.plural}",
             url: "/admin/#{resource.plural}"
             templateUrl: "/admin/#{resource.plural}.html"
+            data:
+              resource: resource
           .state "new_#{resource.singular}",
             url: "/admin/#{resource.plural}/new"
             templateUrl: "/admin/#{resource.plural}/new.html"
+            data:
+              resource: resource
+              mode: "new"
           .state "show_#{resource.singular}",
             url: "/admin/#{resource.plural}/:id"
             templateUrl: (params) ->
               "/admin/#{resource.plural}/#{params.id}.html"
+            data:
+              resource: resource
           .state "edit_#{resource.singular}",
             url: "/admin/#{resource.plural}/:id/edit"
             templateUrl: (params) ->
               "/admin/#{resource.plural}/#{params.id}/edit.html"
+            data:
+              resource: resource
+              mode: "edit"
 
       # TODO :: Find a better way to navigate to the current state
       $state.go "list_#{@resources[0].plural}"

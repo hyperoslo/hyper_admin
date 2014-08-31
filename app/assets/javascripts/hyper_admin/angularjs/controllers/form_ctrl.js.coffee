@@ -1,9 +1,19 @@
 angular.module("hyperadmin")
-  .controller "FormCtrl", ($scope, Restangular) ->
-    @submit = =>
-      target = @meta.target
-      method = @meta.method
+  .controller "FormCtrl", ($scope, $state, Restangular) ->
+    resource = $state.current.data.resource
+    mode = $state.current.data.mode
 
+    if mode == "new"
+      method = "post"
+      target = "admin/#{resource.plural}"
+    else
+      method = "patch"
+      target = "admin/#{resource.plural}/#{$state.params.id}"
+
+      Restangular.one(target).get().then (resource) =>
+        @resource = resource
+
+    @submit = =>
       onError = (response) =>
         @errors = response.data
 
