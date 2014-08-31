@@ -1,7 +1,7 @@
 angular.module("hyperadmin")
-  .factory "Resource", ($rootScope, $state, Restangular) ->
+  .factory "Resource", ($location, $rootScope, $state, Restangular) ->
     Restangular.all("admin/resource_classes").getList().then (resources) =>
-      @resources = resources
+      @resources = Restangular.stripRestangular resources
 
       registerStates()
 
@@ -34,8 +34,11 @@ angular.module("hyperadmin")
               resource: resource
               mode: "edit"
 
-      # TODO :: Find a better way to navigate to the current state
-      $state.go "list_#{@resources[0].plural}"
+      $state.get().forEach (state) =>
+        url = state.url.replace /:id/, "(\\d+)"
+        match = $location.path().match("^#{url}$")
+
+        $state.go state, id: match[1] if match
 
       $rootScope.$emit "resources:states:registered"
 
