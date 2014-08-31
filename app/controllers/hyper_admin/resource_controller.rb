@@ -3,9 +3,7 @@ module HyperAdmin
     before_action :set_resource_class
     before_action :permit_params, only: [ :create, :update ]
 
-    before_action do
-      self.class.layout ->{ request.xhr? ? false : 'hyper_admin/application' }
-    end
+    before_action :set_layout, only: [ :index, :show, :new, :edit ]
 
     def index
       @resources = resource_class.all
@@ -71,6 +69,10 @@ module HyperAdmin
     end
 
     protected
+
+    def set_layout
+      self.class.layout ->{ request.xhr? ? false : 'hyper_admin/application' }
+    end
 
     def set_resource_class
       @resource_class = resource_class
