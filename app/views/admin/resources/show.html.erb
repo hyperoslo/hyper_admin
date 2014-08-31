@@ -2,11 +2,15 @@
   <div class="col-xs-12">
     <header class="page-header">
       <div class="pull-right">
-        <%= link_to "Edit", [ :edit, :admin, @resource ], class: "btn btn-lg btn-default" %>
-        <%= link_to "Destroy", [ :admin, @resource ], class: "btn btn-lg btn-danger", method: :delete %>
+        <a class="btn btn-lg btn-default" ui-sref="edit_{{ showCtrl.resource_class.singular }}({ id: showCtrl.resource.id })">
+          Edit
+        </a>
+        <a class="btn btn-lg btn-danger" ui-sref="show_{{ showCtrl.resource_class.singular }}({ id: showCtrl.resource.id })" data-method="delete">
+          Destroy
+        </a>
       </div>
 
-      <h1><%= @resource.to_s %></h1>
+      <h1>{{ showCtrl.resource_class.singular_human }} #{{ showCtrl.resource.id }}</h1>
     </header>
   </div>
 </div>
@@ -15,10 +19,12 @@
   <div class="col-xs-12">
     <div class="well">
       <dl class="dl-horizontal">
-        <% @resource.attributes.each do |key, value| %>
-          <dt><%= @resource_class.human_attribute_name key %></dt>
-          <dd><%= value %></dd>
-        <% end %>
+        <dt ng-repeat-start="(attr, human) in showCtrl.resource_class.attributes">
+          {{ human }}
+        </dt>
+        <dd ng-repeat-end>
+          {{ showCtrl.resource[attr] }}
+        </dd>
       </dl>
     </div>
   </div>

@@ -24,6 +24,7 @@ angular.module("hyperadmin")
             url: "/admin/#{resource.plural}/:id"
             templateUrl: (params) ->
               "/admin/#{resource.plural}/#{params.id}.html"
+            controller: "ShowCtrl as showCtrl"
             data:
               resource: resource
           .state "edit_#{resource.singular}",
