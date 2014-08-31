@@ -1,14 +1,14 @@
 angular.module("hyperadmin")
   .controller "FormCtrl", ($scope, $state, Restangular) ->
-    resource = $state.current.data.resource
+    @resource_class = $state.current.data.resource
     mode = $state.current.data.mode
 
     if mode == "new"
       method = "post"
-      target = "admin/#{resource.plural}"
+      target = "admin/#{@resource_class.plural}"
     else
       method = "patch"
-      target = "admin/#{resource.plural}/#{$state.params.id}"
+      target = "admin/#{@resource_class.plural}/#{$state.params.id}"
 
       Restangular.one(target).get().then (resource) =>
         @resource = resource
