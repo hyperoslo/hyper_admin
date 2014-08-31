@@ -1,6 +1,11 @@
 angular.module("hyperadmin")
   .controller "FormCtrl", ($state, Restangular) ->
     @resource_class = $state.current.data.resource
+    delete @resource_class.attributes.id
+    delete @resource_class.attributes.created_at
+    delete @resource_class.attributes.updated_at
+
+    @resource = { }
     mode = $state.current.data.mode
 
     if mode == "new"
