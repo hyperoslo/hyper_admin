@@ -16,25 +16,26 @@
     <table class="table table-striped">
       <thead>
         <tr>
-          <% @resource_class.attribute_names.each do |attr| %>
-            <th><%= @resource_class.human_attribute_name attr %></th>
-          <% end %>
-          <th>&nbsp;</th>
+          <th ng-repeat="(attr, human) in indexCtrl.resource_class.attributes">
+            {{ human }}
+          </th>
+          <th>Actions</th>
         </tr>
       </thead>
       <tbody>
-        <% @resources.each do |resource| %>
-          <tr>
-            <% resource.attributes.values.each do |attr| %>
-              <td><%= attr %></th>
-            <% end %>
-            <td>
-              <%= link_to "Show", [ :admin, resource ] %>
-              <%= link_to "Edit", [ :edit, :admin, resource ] %>
-              <%= link_to "Destroy", [ :admin, resource ], method: :delete %>
-            </td>
-          </tr>
-        <% end %>
+        <tr ng-repeat="resource in indexCtrl.resources">
+          <td ng-repeat="attr in resource">
+            {{ attr }}
+          </th>
+          <td>
+            <a ui-sref="show_{{ indexCtrl.resource_class.singular }}({ id: resource.id })">
+              Show
+            </a>
+            <a ui-sref="edit_{{ indexCtrl.resource_class.singular }}({ id: resource.id })">
+              Edit
+            </a>
+          </td>
+        </tr>
       </tbody>
     </table>
   </div>
