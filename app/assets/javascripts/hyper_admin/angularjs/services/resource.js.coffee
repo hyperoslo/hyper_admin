@@ -1,5 +1,5 @@
 angular.module("hyperadmin")
-  .factory "Resource", ($location, $rootScope, $state, Restangular) ->
+  .factory "Resource", ($location, $rootScope, $state, $urlRouter, Restangular) ->
     Restangular.all("admin/resource_classes").getList().then (resources) =>
       @resources = Restangular.stripRestangular resources
 
@@ -8,28 +8,28 @@ angular.module("hyperadmin")
     registerStates = =>
       @resources.forEach (resource) ->
         stateProvider
-          .state "list_#{resource.plural}",
+          .state "#{resource.plural}",
             url: "/admin/#{resource.plural}"
-            templateUrl: "/admin/#{resource.plural}.html"
+            templateUrl: -> "/admin/#{resource.plural}.html"
             controller: "IndexCtrl as indexCtrl"
             data:
               resource: resource
-          .state "new_#{resource.singular}",
-            url: "/admin/#{resource.plural}/new"
-            templateUrl: "/admin/#{resource.plural}/new.html"
+          .state "#{resource.plural}.new",
+            url: "/new"
+            templateUrl: -> "/admin/#{resource.plural}/new.html"
             controller: "NewCtrl as newCtrl"
             data:
               resource: resource
               mode: "new"
-          .state "show_#{resource.singular}",
-            url: "/admin/#{resource.plural}/:id"
+          .state "#{resource.plural}.show",
+            url: "/:id"
             templateUrl: (params) ->
               "/admin/#{resource.plural}/#{params.id}.html"
             controller: "ShowCtrl as showCtrl"
             data:
               resource: resource
-          .state "edit_#{resource.singular}",
-            url: "/admin/#{resource.plural}/:id/edit"
+          .state "#{resource.plural}.edit",
+            url: "/:id/edit"
             templateUrl: (params) ->
               "/admin/#{resource.plural}/#{params.id}/edit.html"
             controller: "EditCtrl as editCtrl"
@@ -38,7 +38,8 @@ angular.module("hyperadmin")
               mode: "edit"
 
       $state.get().forEach (state) =>
-        url = state.url.replace /:id/, "(\\d+)"
+        return unless !!state.templateUrl
+        url = state.templateUrl("nothing").replace(/undefined/, "(\\d+)").replace("\.html", "")
         match = $location.path().match("^#{url}$")
 
         $state.go state, id: match[1] if match
@@ -47,7 +48,7 @@ angular.module("hyperadmin")
 
     menuStates = =>
       @resources.map (resource) ->
-        list_state: "list_#{resource.plural}"
+        list_state: "#{resource.plural}"
         label: resource.menu_label
 
     menuStates: menuStates

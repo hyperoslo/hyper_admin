@@ -1,45 +1,47 @@
-<div class="row">
-  <div class="col-xs-12">
-    <header class="page-header">
-      <div class="pull-right">
-        <a class="btn btn-lg btn-success" ui-sref="new_{{ indexCtrl.resource_class.singular }}">
-          Create new
-        </a>
-      </div>
-      <h1>All {{ indexCtrl.resource_class.plural }}</h1>
-    </header>
+<ui-view>
+  <div class="row">
+    <div class="col-xs-12">
+      <header class="page-header">
+        <div class="pull-right">
+          <a class="btn btn-lg btn-success" ui-sref="{{ indexCtrl.resource_class.plural }}.new">
+            Create new
+          </a>
+        </div>
+        <h1>All {{ indexCtrl.resource_class.plural }}</h1>
+      </header>
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th ng-repeat="(attr, human) in indexCtrl.resource_class.attributes">
-            {{ human }}
-          </th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr ng-repeat="resource in indexCtrl.resources">
-          <td ng-repeat="attr in resource">
-            {{ attr }}
-          </th>
-          <td>
-            <a ui-sref="show_{{ indexCtrl.resource_class.singular }}({ id: resource.id })">
-              Show
-            </a>
-            <a ui-sref="edit_{{ indexCtrl.resource_class.singular }}({ id: resource.id })">
-              Edit
-            </a>
-            <a ui-sref="show_{{ indexCtrl.resource_class.singular }}({ id: resource.id })" delete-link>
-              Destroy
-            </a>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+  <div class="row">
+    <div class="col-xs-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th ng-repeat="(attr, human) in indexCtrl.resource_class.attributes">
+              {{ human }}
+            </th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="resource in indexCtrl.resources">
+            <td ng-repeat="attr in resource">
+              {{ attr }}
+            </th>
+            <td>
+              <a ui-sref="{{ indexCtrl.resource_class.plural }}.show({ id: resource.id })">
+                Show
+              </a>
+              <a ui-sref="{{ indexCtrl.resource_class.plural }}.edit({ id: resource.id })">
+                Edit
+              </a>
+              <a ui-sref="{{ indexCtrl.resource_class.plural }}.show({ id: resource.id })" delete-link>
+                Destroy
+              </a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
+</ui-view>

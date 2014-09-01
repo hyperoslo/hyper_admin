@@ -2,10 +2,10 @@
   <div class="col-xs-12">
     <header class="page-header">
       <div class="pull-right">
-        <a class="btn btn-lg btn-default" ui-sref="edit_{{ showCtrl.resource_class.singular }}({ id: showCtrl.resource.id })">
+        <a class="btn btn-lg btn-default" ui-sref="{{ showCtrl.resource_class.plural }}.edit({ id: showCtrl.resource.id })">
           Edit
         </a>
-        <a class="btn btn-lg btn-danger" ui-sref="show_{{ showCtrl.resource_class.singular }}({ id: showCtrl.resource.id })" delete-link>
+        <a class="btn btn-lg btn-danger" ui-sref="{{ showCtrl.resource_class.plural }}.show({ id: showCtrl.resource.id })" delete-link>
           Destroy
         </a>
       </div>
