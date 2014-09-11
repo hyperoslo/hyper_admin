@@ -1,19 +1,14 @@
 angular.module("hyperadmin")
-  .controller "FormCtrl", ($state, Restangular) ->
-    @resource_class = $state.current.data.resource
-    delete @resource_class.attributes.id
-    delete @resource_class.attributes.created_at
-    delete @resource_class.attributes.updated_at
-
+  .controller "FormCtrl", ($scope, $state, Restangular) ->
     @resource = { }
     mode = $state.current.data.mode
 
     if mode == "new"
       method = "post"
-      target = "admin/#{@resource_class.plural}"
+      target = "admin/#{$scope.resourceClass.plural}"
     else
       method = "patch"
-      target = "admin/#{@resource_class.plural}/#{$state.params.id}"
+      target = "admin/#{$scope.resourceClass.plural}/#{$state.params.id}"
 
       Restangular.one(target).get().then (resource) =>
         @resource = resource
