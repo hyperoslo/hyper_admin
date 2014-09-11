@@ -18,7 +18,7 @@ angular.module("hyperadmin")
         @errors = response.data
 
       onSuccess = (resource) =>
-        # Do nothing yet
+        $state.go "^.show", id: resource.id
 
       if method == "post"
         Restangular.all(target).post(@resource).then onSuccess, onError
