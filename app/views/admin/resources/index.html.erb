@@ -1,16 +1,12 @@
 <ui-view>
-  <div class="row">
-    <div class="col-xs-12">
-      <header class="page-header">
-        <div class="pull-right">
-          <a class="btn btn-lg btn-success" ui-sref="{{ indexCtrl.resource_class.plural }}.new">
-            Create new
-          </a>
-        </div>
-        <h1>All {{ indexCtrl.resource_class.plural }}</h1>
-      </header>
+  <page-header>
+    <div class="pull-right">
+      <a class="btn btn-lg btn-success" ui-sref="{{ indexCtrl.resource_class.plural }}.new">
+        Create new
+      </a>
     </div>
-  </div>
+    <h1>All {{ indexCtrl.resource_class.plural }}</h1>
+  </page-header>
 
   <div class="row">
     <div class="col-xs-12">
