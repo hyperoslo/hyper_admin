@@ -28,11 +28,7 @@
     <div class="container-fluid">
       <div class="row">
         <div class="col-xs-12">
-          <% flash.each do |kind, message| %>
-            <aside class="alert alert-<%= kind %>">
-              <%= message %>
-            </aside>
-          <% end %>
+          <flash-messages></flash-messages>
         </div>
       </div>
 

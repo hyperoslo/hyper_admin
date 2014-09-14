@@ -1,14 +1,16 @@
 angular.module("hyperadmin")
-  .controller "FormCtrl", ($scope, $state, Restangular) ->
+  .controller "FormCtrl", ($scope, $state, Restangular, Flash) ->
     @resource = { }
     mode = $state.current.data.mode
 
     if mode == "new"
       method = "post"
       target = "admin/#{$scope.resourceClass.plural}"
+      successMessage = "#{$scope.resourceClass.singular_human} created successfully."
     else
       method = "patch"
       target = "admin/#{$scope.resourceClass.plural}/#{$state.params.id}"
+      successMessage = "#{$scope.resourceClass.singular_human} updated successfully."
 
       Restangular.one(target).get().then (resource) =>
         @resource = resource
@@ -19,6 +21,7 @@ angular.module("hyperadmin")
 
       onSuccess = (resource) =>
         $state.go "^.show", id: resource.id
+        Flash.setMessage "success", successMessage
 
       if method == "post"
         Restangular.all(target).post(@resource).then onSuccess, onError
