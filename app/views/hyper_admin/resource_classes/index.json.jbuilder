@@ -9,6 +9,7 @@ json.array! @resource_classes do |resource_class|
     {
       key: attr,
       human: resource_class.human_attribute_name(attr),
+      type: resource_class.columns_hash[attr].type
     }
   end
   json.attributes attributes
