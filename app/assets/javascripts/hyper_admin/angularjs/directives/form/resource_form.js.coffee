@@ -10,6 +10,7 @@ angular.module("hyperadmin")
         attr="attribute.key"
         errors="formCtrl.errors[attribute.key]"
         human="attribute.human"
+        type="attribute.type"
         model="formCtrl.resource[attribute.key]">
       </form-input-group>
 

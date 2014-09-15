@@ -8,7 +8,7 @@ angular.module("hyperadmin")
   </label>
 
   <form-input attr="attr" human="human"
-    errors="errors" model="model">
+    errors="errors" model="model" type="type">
   </form-input>
 </div>
     """
@@ -18,3 +18,4 @@ angular.module("hyperadmin")
       errors: "=errors"
       human: "=human"
       model: "=model"
+      type: "=type"
