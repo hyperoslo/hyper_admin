@@ -14,7 +14,7 @@ angular.module("hyperadmin")
         model="formCtrl.resource[attribute.key]">
       </form-input-group>
 
-      <form-actions cancel-state="resourceClass.plural"
+      <form-actions form="form" cancel-state="resourceClass.plural"
     </form>
   </div>
 </div>
