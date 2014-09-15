@@ -11,8 +11,8 @@ angular.module("hyperadmin")
     """
     restrict: "E"
     scope:
+      resource: "=resource"
       name: "=attr"
       placeholder: "=human"
-      model: "=model"
       errors: "=errors"
       type: "=type"

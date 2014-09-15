@@ -1,30 +1,30 @@
 <script type="text/ng-template" id="datetime">
   <input class="form-control" name="{{ name }}" type="datetime-local"
-    placeholder="{{ placeholder }}" ng-model="model">
+    placeholder="{{ placeholder }}" ng-model="resource[name]">
 </script>
 
 <script type="text/ng-template" id="email">
   <input class="form-control" name="{{ name }}" type="email"
-    placeholder="{{ placeholder }}" ng-model="model">
+    placeholder="{{ placeholder }}" ng-model="resource[name]">
 </script>
 
 <script type="text/ng-template" id="integer">
   <input class="form-control" name="{{ name }}" type="number"
-    placeholder="{{ placeholder }}" ng-model="model" step="1">
+    placeholder="{{ placeholder }}" ng-model="resource[name]" step="1">
 </script>
 
 <script type="text/ng-template" id="string">
   <input class="form-control" name="{{ name }}" type="text"
-    placeholder="{{ placeholder }}" ng-model="model">
+    placeholder="{{ placeholder }}" ng-model="resource[name]">
 </script>
 
 <script type="text/ng-template" id="text">
   <textarea class="form-control" name="{{ name }}"
-    placeholder="{{ placeholder }}" ng-model="model">
+    placeholder="{{ placeholder }}" ng-model="resource[name]">
   </textarea>
 </script>
 
 <script type="text/ng-template" id="url">
   <input class="form-control" name="{{ name }}" type="url"
-    placeholder="{{ placeholder }}" ng-model="model">
+    placeholder="{{ placeholder }}" ng-model="resource[name]">
 </script>

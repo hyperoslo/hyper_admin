@@ -8,14 +8,16 @@ angular.module("hyperadmin")
   </label>
 
   <form-input attr="attr" human="human"
-    errors="errors" model="model" type="type">
+    resource="resource" errors="errors"
+    type="type">
   </form-input>
 </div>
     """
     restrict: "E"
     scope:
+      resource: "=resource"
+      attribute: "=attribute"
       attr: "=attr"
       errors: "=errors"
       human: "=human"
-      model: "=model"
       type: "=type"

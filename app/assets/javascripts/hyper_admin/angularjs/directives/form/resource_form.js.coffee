@@ -7,11 +7,11 @@ angular.module("hyperadmin")
 
     <form class="form-horizontal" name="form" ng-submit="formCtrl.submit()" novalidate>
       <form-input-group ng-repeat="attribute in resourceClass.attributes"
+        resource="formCtrl.resource"
         attr="attribute.key"
         errors="formCtrl.errors[attribute.key]"
         human="attribute.human"
-        type="attribute.type"
-        model="formCtrl.resource[attribute.key]">
+        type="attribute.type">
       </form-input-group>
 
       <form-actions form="form" cancel-state="resourceClass.plural"
