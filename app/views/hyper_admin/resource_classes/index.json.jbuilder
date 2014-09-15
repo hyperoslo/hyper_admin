@@ -7,8 +7,9 @@ json.array! @resource_classes do |resource_class|
 
   attributes = resource_class.attribute_names.map do |attr|
     {
-      attr.to_sym => resource_class.human_attribute_name(attr)
+      key: attr,
+      human: resource_class.human_attribute_name(attr),
     }
   end
-  json.attributes attributes.inject(&:merge)
+  json.attributes attributes
 end

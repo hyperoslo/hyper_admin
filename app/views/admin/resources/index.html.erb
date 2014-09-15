@@ -13,16 +13,16 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th ng-repeat="(attr, human) in indexCtrl.resource_class.attributes">
-              {{ human }}
+            <th ng-repeat="attribute in indexCtrl.resource_class.attributes">
+              {{ attribute.human }}
             </th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
           <tr ng-repeat="resource in indexCtrl.resources">
-            <td ng-repeat="attr in resource">
-              {{ attr }}
+            <td ng-repeat="attribute in indexCtrl.resource_class.attributes">
+              {{ resource[attribute.key] }}
             </th>
             <td>
               <a ui-sref="{{ indexCtrl.resource_class.plural }}.show({ id: resource.id })">
