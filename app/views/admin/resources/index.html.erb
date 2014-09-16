@@ -17,6 +17,10 @@
   </div>
 </ui-view>
 
+<script type="text/ng-template" id="table-date">
+  {{ resource[attribute.key] | date }}
+</script>
+
 <script type="text/ng-template" id="table-datetime">
   {{ resource[attribute.key] | date:'medium' }}
 </script>
