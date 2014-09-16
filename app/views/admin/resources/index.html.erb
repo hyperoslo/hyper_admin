@@ -16,3 +16,31 @@
     </div>
   </div>
 </ui-view>
+
+<script type="text/ng-template" id="table-datetime">
+  {{ resource[attribute.key] | date:'medium' }}
+</script>
+
+<script type="text/ng-template" id="table-email">
+  <a href="mailto:{{ resource[attribute.key] }}">
+    {{ resource[attribute.key] }}
+  </a>
+</script>
+
+<script type="text/ng-template" id="table-integer">
+  {{ resource[attribute.key] }}
+</script>
+
+<script type="text/ng-template" id="table-string">
+  {{ resource[attribute.key] | truncate }}
+</script>
+
+<script type="text/ng-template" id="table-text">
+  {{ resource[attribute.key] | truncate }}
+</script>
+
+<script type="text/ng-template" id="table-url">
+  <a href="{{ resource[attribute.key] }}" target="_blank">
+    {{ resource[attribute.key] | truncate }}
+  </a>
+</script>

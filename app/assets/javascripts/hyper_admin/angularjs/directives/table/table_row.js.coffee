@@ -2,7 +2,7 @@ angular.module("hyperadmin")
   .directive "tableRow", ->
     template: """
 <td ng-repeat="attribute in attributes">
-  {{ resource[attribute.key] }}
+  <ng-include src="template(attribute)"></ng-include>
 </td>
 <td>
   <a ui-sref="{{ resourceClass.plural }}.show({ id: resource.id })">
@@ -20,3 +20,5 @@ angular.module("hyperadmin")
     scope:
       attributes: "="
       resource: "="
+    link: (scope) ->
+      scope.template = (attr) -> "table-#{attr.type}"
