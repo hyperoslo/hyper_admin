@@ -42,6 +42,7 @@ en:
         <<: *common
         title: Title
         body: Body text
+        published_at: Publication date
 
       person:
         <<: *common
