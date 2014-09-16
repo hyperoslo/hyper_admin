@@ -10,34 +10,9 @@
 
   <div class="row">
     <div class="col-xs-12">
-      <table class="table table-striped">
-        <thead>
-          <tr>
-            <th ng-repeat="attribute in indexCtrl.resource_class.attributes">
-              {{ attribute.human }}
-            </th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr ng-repeat="resource in indexCtrl.resources">
-            <td ng-repeat="attribute in indexCtrl.resource_class.attributes">
-              {{ resource[attribute.key] }}
-            </th>
-            <td>
-              <a ui-sref="{{ indexCtrl.resource_class.plural }}.show({ id: resource.id })">
-                Show
-              </a>
-              <a ui-sref="{{ indexCtrl.resource_class.plural }}.edit({ id: resource.id })">
-                Edit
-              </a>
-              <a ui-sref="{{ indexCtrl.resource_class.plural }}.show({ id: resource.id })" delete-link>
-                Destroy
-              </a>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <resource-table resource-class="indexCtrl.resource_class"
+        resources="indexCtrl.resources">
+      </resource-table>
     </div>
   </div>
 </ui-view>
