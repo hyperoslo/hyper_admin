@@ -1,3 +1,10 @@
+def infer_type_from_attribute(resource_class, attribute)
+  return :email if attribute == "email"
+  return :url   if attribute == "url"
+
+  resource_class.columns_hash[attribute].type
+end
+
 json.array! @resource_classes do |resource_class|
   json.menu_label resource_class.model_name.human(count: 2)
   json.singular resource_class.model_name.singular
@@ -9,7 +16,7 @@ json.array! @resource_classes do |resource_class|
     {
       key: attr,
       human: resource_class.human_attribute_name(attr),
-      type: resource_class.columns_hash[attr].type
+      type: infer_type_from_attribute(resource_class, attr)
     }
   end
   json.attributes attributes
