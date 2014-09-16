@@ -19,9 +19,42 @@
           {{ attribute.human }}
         </dt>
         <dd ng-repeat-end>
-          {{ showCtrl.resource[attribute.key] }}
+          <ng-include src="showCtrl.template(attribute)"></ng-include>
         </dd>
       </dl>
     </div>
   </div>
 </div>
+
+<script type="text/ng-template" id="show-date">
+  {{ showCtrl.resource[attribute.key] | date:'longDate' }}
+</script>
+
+<script type="text/ng-template" id="show-datetime">
+  {{ showCtrl.resource[attribute.key] | date:'longDate' }}
+  {{ showCtrl.resource[attribute.key] | date:'mediumTime' }}
+</script>
+
+<script type="text/ng-template" id="show-email">
+  <a href="mailto:{{ showCtrl.resource[attribute.key] }}">
+    {{ showCtrl.resource[attribute.key] }}
+  </a>
+</script>
+
+<script type="text/ng-template" id="show-integer">
+  {{ showCtrl.resource[attribute.key] }}
+</script>
+
+<script type="text/ng-template" id="show-string">
+  {{ showCtrl.resource[attribute.key] }}
+</script>
+
+<script type="text/ng-template" id="show-text">
+  {{ showCtrl.resource[attribute.key] }}
+</script>
+
+<script type="text/ng-template" id="show-url">
+  <a href="{{ showCtrl.resource[attribute.key] }}" target="_blank">
+    {{ showCtrl.resource[attribute.key] }}
+  </a>
+</script>

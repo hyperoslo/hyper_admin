@@ -4,4 +4,6 @@ angular.module("hyperadmin")
     Restangular.one("admin/#{@resource_class.plural}", $state.params.id).get().then (resource) =>
       @resource = Restangular.stripRestangular resource
 
+    @template = (attribute) -> "show-#{attribute.type}"
+
     this
