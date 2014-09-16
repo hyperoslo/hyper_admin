@@ -15,6 +15,10 @@ angular.module("hyperadmin")
       Restangular.one(target).get().then (resource) =>
         @resource = resource
 
+    [ "id", "created_at", "updated_at" ].forEach (key) ->
+      _.remove $scope.resourceClass.attributes, (attr) ->
+        attr.key == key
+
     @submit = =>
       onError = (response) =>
         @errors = response.data
