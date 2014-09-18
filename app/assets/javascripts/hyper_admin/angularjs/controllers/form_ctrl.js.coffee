@@ -15,6 +15,11 @@ angular.module("hyperadmin")
       Restangular.one(target).get().then (resource) =>
         @resource = resource
 
+        $scope.resourceClass.attributes.forEach (attr) =>
+          if attr.type == "date" or attr.type == "datetime"
+            if @resource[attr.key]
+              @resource[attr.key] = new Date @resource[attr.key]
+
     [ "id", "created_at", "updated_at" ].forEach (key) ->
       _.remove $scope.resourceClass.attributes, (attr) ->
         attr.key == key
