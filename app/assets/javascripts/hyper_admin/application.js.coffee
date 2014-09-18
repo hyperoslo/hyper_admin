@@ -1,6 +1,6 @@
 #= require jquery
 #= require jquery_ujs
-#= require angular
+#= require unstable/angular
 #= require angular-ui-router
 #= require lodash
 #= require restangular
