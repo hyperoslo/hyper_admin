@@ -18,7 +18,7 @@
 
           <ul class="nav navbar-nav">
             <li ng-repeat="resource in navbarCtrl.resources" ui-sref-active="active">
-              <a ui-sref="{{ resource.list_state }}">{{ resource.label }}</a>
+              <a ui-sref="index({ pluralName: resource.list_state })">{{ resource.label }}</a>
             </li>
           </ul>
         </div>
