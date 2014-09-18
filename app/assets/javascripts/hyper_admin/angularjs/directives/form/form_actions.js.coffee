@@ -6,7 +6,7 @@ angular.module("hyperadmin")
     <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
       Submit
     </button>
-    <a class="btn btn-danger" ui-sref="{{ cancelState }}">Cancel</a>
+    <a class="btn btn-danger" ui-sref="^">Cancel</a>
   </div>
 </div>
     """

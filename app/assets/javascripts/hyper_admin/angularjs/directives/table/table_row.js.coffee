@@ -5,15 +5,9 @@ angular.module("hyperadmin")
   <ng-include src="template(attribute)"></ng-include>
 </td>
 <td>
-  <a ui-sref="{{ resourceClass.plural }}.show({ id: resource.id })">
-    Show
-  </a>
-  <a ui-sref="{{ resourceClass.plural }}.edit({ id: resource.id })">
-    Edit
-  </a>
-  <a ui-sref="{{ resourceClass.plural }}.show({ id: resource.id })" delete-link>
-    Destroy
-  </a>
+  <a ui-sref=".show({ id: resource.id })">Show</a>
+  <a ui-sref=".edit({ id: resource.id })">Edit</a>
+  <a ui-sref=".show({ id: resource.id })" delete-link>Destroy</a>
 </td>
     """
     restrict: "A"
