@@ -1,3 +1,3 @@
 angular.module("hyperadmin")
-  .controller "MainCtrl", (Resource) ->
+  .controller "MainCtrl", ->
     this
