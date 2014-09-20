@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="hyperadmin">
   <head>
     <title>HyperAdmin</title>
 
@@ -9,26 +9,30 @@
 
     <%= csrf_meta_tags %>
   </head>
-  <body>
+  <body ng-controller="MainCtrl as mainCtrl">
 
-    <nav class="navbar navbar-default">
+    <nav class="navbar navbar-default" ng-controller="NavbarCtrl as navbarCtrl">
       <div class="container-fluid">
         <div class="navbar-header">
           <a class="navbar-brand" href="/admin">Admin</a>
 
           <ul class="nav navbar-nav">
-            <% @resource_classes.each do |resource_class| %>
-              <li class="<%= "active" if params[:controller] == "admin/#{resource_class.model_name.plural}" %>">
-                <%= link_to resource_class.model_name.human(count: 2), [ :admin, resource_class ] %>
-              </li>
-            <% end %>
+            <li ng-repeat="resource in navbarCtrl.resources" ui-sref-active="active">
+              <a ui-sref="index({ pluralName: resource.list_state })">{{ resource.label }}</a>
+            </li>
           </ul>
         </div>
       </div>
     </nav>
 
     <div class="container-fluid">
-      <%= yield %>
+      <div class="row">
+        <div class="col-xs-12">
+          <flash-messages></flash-messages>
+        </div>
+      </div>
+
+      <ui-view></ui-view>
     </div>
 
   </body>

@@ -1,39 +1,50 @@
-<div class="row">
-  <div class="col-xs-12">
-    <header class="page-header">
-      <div class="pull-right">
-        <%= link_to "Create new",[ :new, :admin, @resource_class.model_name.singular_route_key ], class: "btn btn-lg btn-success" %>
-      </div>
-      <h1>All <%= @resource_class.model_name.plural %></h1>
-    </header>
-  </div>
-</div>
+<ui-view>
+  <page-header>
+    <div class="pull-right">
+      <a class="btn btn-lg btn-success" ui-sref=".new">
+        Create new
+      </a>
+    </div>
+    <h1>All {{ indexCtrl.resource_class.plural }}</h1>
+  </page-header>
 
-<div class="row">
-  <div class="col-xs-12">
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <% @resource_class.attribute_names.each do |attr| %>
-            <th><%= @resource_class.human_attribute_name attr %></th>
-          <% end %>
-          <th>&nbsp;</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @resources.each do |resource| %>
-          <tr>
-            <% resource.attributes.values.each do |attr| %>
-              <td><%= attr %></th>
-            <% end %>
-            <td>
-              <%= link_to "Show", [ :admin, resource ] %>
-              <%= link_to "Edit", [ :edit, :admin, resource ] %>
-              <%= link_to "Destroy", [ :admin, resource ], method: :delete %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
+  <div class="row">
+    <div class="col-xs-12">
+      <resource-table resource-class="indexCtrl.resource_class"
+        resources="indexCtrl.resources">
+      </resource-table>
+    </div>
   </div>
-</div>
+</ui-view>
+
+<script type="text/ng-template" id="table-date">
+  {{ resource[attribute.key] | date }}
+</script>
+
+<script type="text/ng-template" id="table-datetime">
+  {{ resource[attribute.key] | date:'medium' }}
+</script>
+
+<script type="text/ng-template" id="table-email">
+  <a href="mailto:{{ resource[attribute.key] }}">
+    {{ resource[attribute.key] }}
+  </a>
+</script>
+
+<script type="text/ng-template" id="table-integer">
+  {{ resource[attribute.key] }}
+</script>
+
+<script type="text/ng-template" id="table-string">
+  {{ resource[attribute.key] | truncate }}
+</script>
+
+<script type="text/ng-template" id="table-text">
+  {{ resource[attribute.key] | truncate }}
+</script>
+
+<script type="text/ng-template" id="table-url">
+  <a href="{{ resource[attribute.key] }}" target="_blank">
+    {{ resource[attribute.key] | truncate }}
+  </a>
+</script>

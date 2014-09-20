@@ -42,8 +42,12 @@ en:
         <<: *common
         title: Title
         body: Body text
+        published_at: Publication date
 
       person:
         <<: *common
         first_name: First name
         last_name: Last name
+        email: E-mail address
+        url: Website
+        birthday: Date of birth

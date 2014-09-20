@@ -1,9 +1,8 @@
-<div class="row">
-  <div class="col-xs-12">
-    <header class="page-header">
-      <h1>New <%= @resource_class.model_name.singular %></h1>
-    </header>
-  </div>
-</div>
+<page-header>
+  <h1>New {{ newCtrl.resource_class.singular }}</h1>
+</page-header>
 
-<%= render "admin/resources/form", resource_class: @resource_class, resource: @resource %>
+<resource-form resource-class="newCtrl.resource_class">
+</resource-form>
+
+<%= render "admin/resources/form" %>

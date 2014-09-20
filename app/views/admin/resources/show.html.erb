@@ -1,25 +1,60 @@
-<div class="row">
-  <div class="col-xs-12">
-    <header class="page-header">
-      <div class="pull-right">
-        <%= link_to "Edit", [ :edit, :admin, @resource ], class: "btn btn-lg btn-default" %>
-        <%= link_to "Destroy", [ :admin, @resource ], class: "btn btn-lg btn-danger", method: :delete %>
-      </div>
-
-      <h1><%= @resource.to_s %></h1>
-    </header>
+<page-header>
+  <div class="pull-right">
+    <a class="btn btn-lg btn-default" ui-sref="^.edit({ id: showCtrl.resource.id })">
+      Edit
+    </a>
+    <a class="btn btn-lg btn-danger" ui-sref="^.show({ id: showCtrl.resource.id })" delete-link>
+      Destroy
+    </a>
   </div>
-</div>
+
+  <h1>{{ showCtrl.resource_class.singular_human }} #{{ showCtrl.resource.id }}</h1>
+</page-header>
 
 <div class="row">
   <div class="col-xs-12">
     <div class="well">
       <dl class="dl-horizontal">
-        <% @resource.attributes.each do |key, value| %>
-          <dt><%= @resource_class.human_attribute_name key %></dt>
-          <dd><%= value %></dd>
-        <% end %>
+        <dt ng-repeat-start="attribute in showCtrl.resource_class.attributes">
+          {{ attribute.human }}
+        </dt>
+        <dd ng-repeat-end>
+          <ng-include src="showCtrl.template(attribute)"></ng-include>
+        </dd>
       </dl>
     </div>
   </div>
 </div>
+
+<script type="text/ng-template" id="show-date">
+  {{ showCtrl.resource[attribute.key] | date:'longDate' }}
+</script>
+
+<script type="text/ng-template" id="show-datetime">
+  {{ showCtrl.resource[attribute.key] | date:'longDate' }}
+  {{ showCtrl.resource[attribute.key] | date:'mediumTime' }}
+</script>
+
+<script type="text/ng-template" id="show-email">
+  <a href="mailto:{{ showCtrl.resource[attribute.key] }}">
+    {{ showCtrl.resource[attribute.key] }}
+  </a>
+</script>
+
+<script type="text/ng-template" id="show-integer">
+  {{ showCtrl.resource[attribute.key] }}
+</script>
+
+<script type="text/ng-template" id="show-string">
+  {{ showCtrl.resource[attribute.key] }}
+</script>
+
+<script type="text/ng-template" id="show-text">
+  {{ showCtrl.resource[attribute.key] }}
+</script>
+
+<script type="text/ng-template" id="show-url">
+  <a href="{{ showCtrl.resource[attribute.key] }}" target="_blank">
+    {{ showCtrl.resource[attribute.key] }}
+  </a>
+</script>

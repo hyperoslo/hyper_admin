@@ -1,3 +1,5 @@
+require 'angularjs-rails'
+require 'jbuilder'
 require 'jquery-rails'
 
 require 'hyper_admin/engine'

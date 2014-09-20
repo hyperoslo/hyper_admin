@@ -3,33 +3,41 @@ module HyperAdmin
     before_action :set_resource_class
     before_action :permit_params, only: [ :create, :update ]
 
+    before_action :set_layout, only: [ :index, :show, :new, :edit ]
+
     def index
       @resources = resource_class.all
-      render 'admin/resources/index', layout: layout
+      render 'admin/resources/index'
     end
 
     def show
       @resource = resource
-      render 'admin/resources/show', layout: layout
+      render 'admin/resources/show'
     end
 
     def new
       @resource = resource_class.new
-      render 'admin/resources/new', layout: layout
+      @attributes = @resource.attributes.delete_if do |k, v|
+        k.to_sym.in? [ :id, :created_at, :updated_at ]
+      end
+      render 'admin/resources/new'
     end
 
     def edit
       @resource = resource
-      render 'admin/resources/edit', layout: layout
+      @attributes = @resource.attributes.delete_if do |k, v|
+        k.to_sym.in? [ :id, :created_at, :updated_at ]
+      end
+      render 'admin/resources/edit'
     end
 
     def create
       @resource = @resource_class.new params[@resource_class.model_name.param_key]
 
       if @resource.save
-        redirect_to [ :admin, @resource ]
+        render json: @resource
       else
-        render "admin/resources/new", layout: layout
+        render json: @resource.errors, status: 422
       end
     end
 
@@ -37,9 +45,9 @@ module HyperAdmin
       @resource = @resource_class.find params[:id]
 
       if @resource.update params[@resource_class.model_name.param_key]
-        redirect_to [ :admin, @resource ]
+        render json: @resource
       else
-        render "admin/resources/edit", layout: layout
+        render json: @resource.errors, status: 422
       end
     end
 
@@ -48,7 +56,7 @@ module HyperAdmin
 
       @resource.destroy
 
-      redirect_to [ :admin, @resource_class ]
+      head 200
     end
 
     def resource
@@ -61,16 +69,16 @@ module HyperAdmin
 
     protected
 
+    def set_layout
+      self.class.layout ->{ request.xhr? ? false : 'hyper_admin/application' }
+    end
+
     def set_resource_class
       @resource_class = resource_class
     end
 
     def permit_params
       params.permit!
-    end
-
-    def layout
-      'hyper_admin/application'
     end
   end
 end
