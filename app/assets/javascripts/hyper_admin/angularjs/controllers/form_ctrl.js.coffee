@@ -24,9 +24,19 @@ angular.module("hyperadmin")
       _.remove $scope.resourceClass.attributes, (attr) ->
         attr.key == key
 
+    prettifyErrors = (errors) ->
+      result = { }
+      for own attr of errors
+        attrSchema = _.find $scope.resourceClass.attributes, (attribute) =>
+          attribute.key == attr
+
+        result[attrSchema.human] = errors[attr]
+
+      result
+
     @submit = =>
       onError = (response) =>
-        @errors = response.data
+        @errors = prettifyErrors response.data
 
       onSuccess = (resource) =>
         $state.go "^.show", id: resource.id
