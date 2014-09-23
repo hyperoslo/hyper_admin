@@ -66,5 +66,4 @@ code, and if you're using HyperAdmin we probably want to hire you.
 
 ## License
 
-Knowledge Base is available under the MIT license. See LICENSE.md for more
-details.
+HyperAdmin is available under the MIT license. See LICENSE.md for more details.
