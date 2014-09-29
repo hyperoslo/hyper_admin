@@ -10,7 +10,6 @@ module HyperAdmin
 
     delegate :register, to: :application
     delegate :routes,   to: :application
-    delegate :setup,    to: :application
 
     def application
       @application ||= HyperAdmin::Application.new
