@@ -6,7 +6,7 @@ angular.module("hyperadmin")
     <form-errors errors="formCtrl.errors"></form-errors> 
 
     <form class="form-horizontal" name="form" ng-submit="formCtrl.submit()" novalidate>
-      <form-input-group ng-repeat="attribute in resourceClass.attributes"
+      <form-input-group ng-repeat="attribute in resourceClass.form_attributes"
         resource="formCtrl.resource"
         attr="attribute.key"
         errors="formCtrl.errors[attribute.key]"
@@ -24,4 +24,4 @@ angular.module("hyperadmin")
       resourceClass: "=resourceClass"
     controller: ($scope) ->
       [ "id", "created_at", "updated_at" ].forEach (attr) ->
-        delete $scope.resourceClass.attributes[attr]
+        delete $scope.resourceClass.form_attributes[attr]

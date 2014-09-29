@@ -13,8 +13,8 @@ module HyperAdmin
       prevent_rails_autoloading_load_paths
     end
 
-    def register(resource_class)
-      resource = @resources.add resource_class
+    def register(resource_class, &block)
+      resource = @resources.add resource_class, &block
       create_resource_controller resource
     end
 

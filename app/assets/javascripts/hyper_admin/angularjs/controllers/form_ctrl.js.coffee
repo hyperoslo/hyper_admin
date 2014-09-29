@@ -15,18 +15,28 @@ angular.module("hyperadmin")
       Restangular.one(target).get().then (resource) =>
         @resource = resource
 
-        $scope.resourceClass.attributes.forEach (attr) =>
+        $scope.resourceClass.form_attributes.forEach (attr) =>
           if attr.type == "date" or attr.type == "datetime"
             if @resource[attr.key]
               @resource[attr.key] = new Date @resource[attr.key]
 
     [ "id", "created_at", "updated_at" ].forEach (key) ->
-      _.remove $scope.resourceClass.attributes, (attr) ->
+      _.remove $scope.resourceClass.form_attributes, (attr) ->
         attr.key == key
+
+    prettifyErrors = (errors) ->
+      result = { }
+      for own attr of errors
+        attrSchema = _.find $scope.resourceClass.form_attributes, (attribute) =>
+          attribute.key == attr
+
+        result[attrSchema.human] = errors[attr]
+
+      result
 
     @submit = =>
       onError = (response) =>
-        @errors = response.data
+        @errors = prettifyErrors response.data
 
       onSuccess = (resource) =>
         $state.go "^.show", id: resource.id
