@@ -4,14 +4,14 @@ angular.module("hyperadmin")
 <table class="table table-striped">
   <thead>
     <tr>
-      <th ng-repeat="attribute in resourceClass.attributes">
+      <th ng-repeat="attribute in resourceClass.index_attributes">
         {{ attribute.human }}
       </th>
       <th>Actions</th>
     </tr>
   </thead>
   <tbody>
-    <tr table-row attributes="resourceClass.attributes"
+    <tr table-row attributes="resourceClass.index_attributes"
       ng-repeat="resource in resources" resource="resource">
     </tr>
   </tbody>
