@@ -87,7 +87,7 @@ HyperAdmin.register Article do
 end
 ```
 
-The **email** type will create a “mailto”-style link in the index and show
+The “email” type will create a “mailto”-style link in the index and show
 views, and an `<input type="email">` in the form. Likewise, the “url” type will
 create a regular link in index/show and an `<input type="url">` in forms.
 
