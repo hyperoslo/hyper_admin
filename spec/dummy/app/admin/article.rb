@@ -8,6 +8,6 @@ HyperAdmin.register Article do
 
   form do
     field :title
-    field :body, type: :string
+    field :body
   end
 end
