@@ -4,5 +4,7 @@
 #= require angular-ui-router
 #= require lodash
 #= require restangular
+#= require material/material
+#= require material/ripples
 #= require ./angularjs/config
 #= require_tree ./angularjs
