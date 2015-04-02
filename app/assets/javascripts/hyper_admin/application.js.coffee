@@ -1,10 +1,12 @@
 #= require jquery
 #= require jquery_ujs
 #= require angular
+#= require angular-animate
+#= require angular-aria
 #= require angular-ui-router
 #= require lodash
 #= require restangular
 #= require material/material
-#= require material/ripples
+#= require hyper-content-for
 #= require ./angularjs/config
 #= require_tree ./angularjs

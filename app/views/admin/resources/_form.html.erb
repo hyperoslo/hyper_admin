@@ -1,35 +1,55 @@
 <script type="text/ng-template" id="date">
-  <input class="form-control" name="{{ name }}" type="date"
-    placeholder="{{ placeholder }}" ng-model="resource[name]">
+  <md-input-container>
+    <label>{{ attr.human }}</label>
+    <input class="form-control" name="{{ attr.key }}" type="date"
+      placeholder="{{ attr.placeholder }}" ng-model="formCtrl.resource[attr.key]">
+  </md-input-container>
 </script>
 
 <script type="text/ng-template" id="datetime">
-  <input class="form-control" name="{{ name }}" type="datetime-local"
-    placeholder="{{ placeholder }}" ng-model="resource[name]">
+  <md-input-container>
+    <label>{{ attr.human }}</label>
+    <input class="form-control" name="{{ attr.key }}" type="datetime-local"
+      placeholder="{{ attr.placeholder }}" ng-model="formCtrl.resource[attr.key]">
+  </md-input-container>
 </script>
 
 <script type="text/ng-template" id="email">
-  <input class="form-control" name="{{ name }}" type="email"
-    placeholder="{{ placeholder }}" ng-model="resource[name]">
+  <md-input-container>
+    <label>{{ attr.human }}</label>
+    <input class="form-control" name="{{ attr.key }}" type="email"
+      placeholder="{{ attr.placeholder }}" ng-model="formCtrl.resource[attr.key]">
+  </md-input-container>
 </script>
 
 <script type="text/ng-template" id="integer">
-  <input class="form-control" name="{{ name }}" type="number"
-    placeholder="{{ placeholder }}" ng-model="resource[name]" step="1">
+  <md-input-container>
+    <label>{{ attr.human }}</label>
+    <input class="form-control" name="{{ attr.key }}" type="number"
+      placeholder="{{ attr.placeholder }}" ng-model="formCtrl.resource[attr.key]" step="1">
+  </md-input-container>
 </script>
 
 <script type="text/ng-template" id="string">
-  <input class="form-control" name="{{ name }}" type="text"
-    placeholder="{{ placeholder }}" ng-model="resource[name]">
+  <md-input-container>
+    <label>{{ attr.human }}</label>
+    <input class="form-control" name="{{ attr.key }}" type="text"
+      placeholder="{{ attr.placeholder }}" ng-model="formCtrl.resource[attr.key]">
+  </md-input-container>
 </script>
 
 <script type="text/ng-template" id="text">
-  <textarea class="form-control" name="{{ name }}" rows="15"
-    placeholder="{{ placeholder }}" ng-model="resource[name]">
-  </textarea>
+  <md-input-container>
+    <label>{{ attr.human }}</label>
+    <textarea class="form-control" name="{{ attr.key }}" placeholder="{{ attr.placeholder }}"
+      ng-model="formCtrl.resource[attr.key]"></textarea>
+  </md-input-container>
 </script>
 
 <script type="text/ng-template" id="url">
-  <input class="form-control" name="{{ name }}" type="url"
-    placeholder="{{ placeholder }}" ng-model="resource[name]">
+  <md-input-container>
+    <label>{{ attr.human }}</label>
+    <input class="form-control" name="{{ attr.key }}" type="url"
+      placeholder="{{ attr.placeholder }}" ng-model="formCtrl.resource[attr.key]">
+  </md-input-container>
 </script>

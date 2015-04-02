@@ -1,12 +1,7 @@
 <ui-view>
-  <page-header>
-    <div class="pull-right">
-      <a class="btn btn-lg btn-success" ui-sref=".new">
-        Create new
-      </a>
-    </div>
-    <h1>All {{ indexCtrl.resource_class.plural }}</h1>
-  </page-header>
+  <hyper-content for="toolbar">
+    All {{ indexCtrl.resource_class.plural }}
+  </hyper-content>
 
   <div class="row">
     <div class="col-xs-12">
@@ -15,6 +10,8 @@
       </resource-table>
     </div>
   </div>
+
+  <md-button class="md-fab md-primary new-btn" ui-sref=".new">+</md-button>
 </ui-view>
 
 <script type="text/ng-template" id="table-date">

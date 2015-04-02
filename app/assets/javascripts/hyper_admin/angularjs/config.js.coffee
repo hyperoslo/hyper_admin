@@ -1,4 +1,4 @@
-angular.module("hyperadmin", [ "restangular", "ui.router" ])
+angular.module("hyperadmin", [ "ngAnimate", "ngAria", "ngMaterial", "restangular", "ui.router", "hyperContentFor" ])
   .config ($httpProvider) ->
     authToken = $("meta[name=\"csrf-token\"]").attr("content")
     $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken

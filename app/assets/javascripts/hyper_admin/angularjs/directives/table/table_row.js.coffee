@@ -4,10 +4,10 @@ angular.module("hyperadmin")
 <td ng-repeat="attribute in attributes">
   <ng-include src="template(attribute)"></ng-include>
 </td>
-<td>
-  <a ui-sref=".show({ id: resource.id })">Show</a>
-  <a ui-sref=".edit({ id: resource.id })">Edit</a>
-  <a ui-sref=".show({ id: resource.id })" delete-link>Destroy</a>
+<td class="actions">
+  <md-button class="md-primary" ui-sref=".show({ id: resource.id })">Show</md-button>
+  <md-button ui-sref=".edit({ id: resource.id })">Edit</md-button>
+  <md-button class="md-warn" ui-sref=".show({ id: resource.id })" delete-link>Delete</md-button>
 </td>
     """
     restrict: "A"

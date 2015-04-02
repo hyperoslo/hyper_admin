@@ -1,30 +1,25 @@
-<page-header>
-  <div class="pull-right">
-    <a class="btn btn-lg btn-default" ui-sref="^.edit({ id: showCtrl.resource.id })">
-      Edit
-    </a>
-    <a class="btn btn-lg btn-danger" ui-sref="^.show({ id: showCtrl.resource.id })" delete-link>
-      Destroy
-    </a>
-  </div>
+<hyper-content for="toolbar">
+  {{ showCtrl.resource_class.singular_human }} #{{ showCtrl.resource.id }}
+</hyper-content>
 
-  <h1>{{ showCtrl.resource_class.singular_human }} #{{ showCtrl.resource.id }}</h1>
-</page-header>
+<hyper-content for="toolbar-right">
+  <md-button ui-sref="^.edit({ id: showCtrl.resource.id })">
+    Edit
+  </md-button>
+  <md-button ui-sref="^.show({ id: showCtrl.resource.id })" delete-link>
+    Delete
+  </md-button>
+</hyper-content>
 
-<div class="row">
-  <div class="col-xs-12">
-    <div class="well">
-      <dl class="dl-horizontal">
-        <dt ng-repeat-start="attribute in showCtrl.resource_class.show_attributes">
-          {{ attribute.human }}
-        </dt>
-        <dd ng-repeat-end>
-          <ng-include src="showCtrl.template(attribute)"></ng-include>
-        </dd>
-      </dl>
-    </div>
-  </div>
-</div>
+<dl ng-repeat="attribute in showCtrl.resource_class.show_attributes"
+  layout="row" layout-margin>
+  <dt flex="20">
+    {{ attribute.human }}
+  </dt>
+  <dd flex>
+    <ng-include src="showCtrl.template(attribute)"></ng-include>
+  </dd>
+</dl>
 
 <script type="text/ng-template" id="show-date">
   {{ showCtrl.resource[attribute.key] | date:'longDate' }}
