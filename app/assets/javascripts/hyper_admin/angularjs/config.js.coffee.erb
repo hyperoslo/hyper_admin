@@ -1,0 +1,30 @@
+angular.module("hyperadmin", [ "ngAnimate", "ngAria", "ngMaterial", "restangular", "ui.router", "hyperContentFor" ])
+  .config ($httpProvider) ->
+    authToken = $("meta[name=\"csrf-token\"]").attr("content")
+    $httpProvider.defaults.headers.common["X-CSRF-TOKEN"] = authToken
+    $httpProvider.defaults.headers.common["X-Requested-With"] = "XMLHttpRequest"
+    $httpProvider.defaults.headers.common["Accept"] = "text/html,application/json"
+
+  .config ($stateProvider) ->
+    window.stateProvider = $stateProvider
+
+  .config (RestangularProvider) ->
+    RestangularProvider.setRequestSuffix '.json'
+
+  .config ($mdIconProvider) ->
+    $mdIconProvider
+      .iconSet 'action',         '<%= image_path "hyper_admin/icons/material/svg-sprite-action.svg" %>'
+      .iconSet 'alert',          '<%= image_path "hyper_admin/icons/material/svg-sprite-alert.svg" %>'
+      .iconSet 'av',             '<%= image_path "hyper_admin/icons/material/svg-sprite-av.svg" %>'
+      .iconSet 'communication',  '<%= image_path "hyper_admin/icons/material/svg-sprite-communication.svg" %>'
+      .iconSet 'content',        '<%= image_path "hyper_admin/icons/material/svg-sprite-content.svg" %>'
+      .iconSet 'device',         '<%= image_path "hyper_admin/icons/material/svg-sprite-device.svg" %>'
+      .iconSet 'editor',         '<%= image_path "hyper_admin/icons/material/svg-sprite-editor.svg" %>'
+      .iconSet 'file',           '<%= image_path "hyper_admin/icons/material/svg-sprite-file.svg" %>'
+      .iconSet 'hardware',       '<%= image_path "hyper_admin/icons/material/svg-sprite-hardware.svg" %>'
+      .iconSet 'image',          '<%= image_path "hyper_admin/icons/material/svg-sprite-image.svg" %>'
+      .iconSet 'maps',           '<%= image_path "hyper_admin/icons/material/svg-sprite-maps.svg" %>'
+      .iconSet 'navigation',     '<%= image_path "hyper_admin/icons/material/svg-sprite-navigation.svg" %>'
+      .iconSet 'notification',   '<%= image_path "hyper_admin/icons/material/svg-sprite-notification.svg" %>'
+      .iconSet 'social',         '<%= image_path "hyper_admin/icons/material/svg-sprite-social.svg" %>'
+      .iconSet 'toggle',         '<%= image_path "hyper_admin/icons/material/svg-sprite-toggle.svg" %>'
