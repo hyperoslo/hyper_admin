@@ -3,6 +3,12 @@
     <label>{{ attr.human }}</label>
     <input class="form-control" name="{{ attr.key }}" type="date"
       placeholder="{{ attr.placeholder }}" ng-model="formCtrl.resource[attr.key]">
+    <ng-messages for="form[attr.key].$error">
+      <ng-message when="date">
+        Please input a date in the format
+        <em>yyyy</em>-<em>mm</em>-<em>dd</em>
+      </ng-message>
+    </ng-messages>
   </md-input-container>
 </script>
 
@@ -11,6 +17,12 @@
     <label>{{ attr.human }}</label>
     <input class="form-control" name="{{ attr.key }}" type="datetime-local"
       placeholder="{{ attr.placeholder }}" ng-model="formCtrl.resource[attr.key]">
+    <ng-messages for="form[attr.key].$error">
+      <ng-message when="datetimelocal">
+        Please input a date and time in the formain the format
+          <em>yyyy</em>-<em>mm</em>-<em>dd</em>T<em>hh</em>:<em>mm</em>:<em>ss</em>
+      </ng-message>
+    </ng-messages>
   </md-input-container>
 </script>
 
@@ -19,6 +31,9 @@
     <label>{{ attr.human }}</label>
     <input class="form-control" name="{{ attr.key }}" type="email"
       placeholder="{{ attr.placeholder }}" ng-model="formCtrl.resource[attr.key]">
+    <ng-messages for="form[attr.key].$error">
+      <ng-message when="email">Please input a valid e-mail address</ng-message>
+    </ng-messages>
   </md-input-container>
 </script>
 
@@ -27,6 +42,9 @@
     <label>{{ attr.human }}</label>
     <input class="form-control" name="{{ attr.key }}" type="number"
       placeholder="{{ attr.placeholder }}" ng-model="formCtrl.resource[attr.key]" step="1">
+    <ng-messages for="form[attr.key].$error">
+      <ng-message when="number">Please input a valid number</ng-message>
+    </ng-messages>
   </md-input-container>
 </script>
 
@@ -35,6 +53,8 @@
     <label>{{ attr.human }}</label>
     <input class="form-control" name="{{ attr.key }}" type="text"
       placeholder="{{ attr.placeholder }}" ng-model="formCtrl.resource[attr.key]">
+    <ng-messages for="form[attr.key].$error">
+    </ng-messages>
   </md-input-container>
 </script>
 
@@ -43,6 +63,8 @@
     <label>{{ attr.human }}</label>
     <textarea class="form-control" name="{{ attr.key }}" placeholder="{{ attr.placeholder }}"
       ng-model="formCtrl.resource[attr.key]"></textarea>
+    <ng-messages for="form[attr.key].$error">
+    </ng-messages>
   </md-input-container>
 </script>
 
@@ -51,5 +73,8 @@
     <label>{{ attr.human }}</label>
     <input class="form-control" name="{{ attr.key }}" type="url"
       placeholder="{{ attr.placeholder }}" ng-model="formCtrl.resource[attr.key]">
+    <ng-messages for="form[attr.key].$error">
+      <ng-message when="url">Please input a valid URL</ng-message>
+    </ng-messages>
   </md-input-container>
 </script>

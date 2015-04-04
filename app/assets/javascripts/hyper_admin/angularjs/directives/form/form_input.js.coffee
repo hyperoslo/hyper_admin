@@ -3,10 +3,6 @@ angular.module("hyperadmin")
     template: """
 <div>
   <ng-include src="type"></ng-include>
-  <span class="glyphicon glyphicon-remove form-control-feedback"></span>
-  <span class="help-block error" ng-show="!!errors" ng-repeat="error in errors">
-    {{ placeholder }} {{ error }}
-  </span>
 </div>
     """
     restrict: "E"

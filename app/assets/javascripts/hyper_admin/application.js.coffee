@@ -3,6 +3,7 @@
 #= require angular
 #= require angular-animate
 #= require angular-aria
+#= require angular-messages
 #= require angular-ui-router
 #= require lodash
 #= require restangular
