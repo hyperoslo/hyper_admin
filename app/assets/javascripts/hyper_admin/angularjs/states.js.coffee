@@ -3,6 +3,10 @@ angular.module("hyperadmin")
     $locationProvider.html5Mode true
 
     $stateProvider
+      .state "dashboard",
+        url: "/admin"
+        templateUrl: "/admin?format=html"
+        controller: ->
       .state "index",
         url: "/admin/:pluralName"
         templateUrl: (params) ->
