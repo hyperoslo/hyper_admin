@@ -15,7 +15,6 @@ Gem::Specification.new do |gem|
   gem.files = Dir['{app,config,db,lib}/**/*', 'MIT-LICENSE', 'Rakefile', 'README.md']
   gem.test_files = Dir['spec/**/*']
 
-  gem.add_dependency 'angularjs-rails', '~> 1.3'
   gem.add_dependency 'coffee-rails', '~> 4.1'
   gem.add_dependency 'jbuilder', '~> 2.2'
   gem.add_dependency 'jquery-rails', '~> 4.0'

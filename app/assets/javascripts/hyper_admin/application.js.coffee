@@ -7,7 +7,7 @@
 #= require angular-ui-router
 #= require lodash
 #= require restangular
-#= require material/material
+#= require angular-material
 #= require hyper-content-for
 #= require ./angularjs/config
 #= require_tree ./angularjs
