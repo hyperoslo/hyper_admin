@@ -1,5 +1,5 @@
 angular.module("hyperadmin")
-  .controller "FormController", ($scope, $state, Restangular, Flash) ->
+  .controller "FormController", ($scope, $state, Restangular) ->
     @resource = { }
     mode = $state.current.data.mode
 
@@ -40,7 +40,6 @@ angular.module("hyperadmin")
 
       onSuccess = (resource) =>
         $state.go "^.show", id: resource.id
-        Flash.setMessage "success", successMessage
 
       if method == "post"
         Restangular.all(target).post(@resource).then onSuccess, onError
