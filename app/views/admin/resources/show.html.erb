@@ -1,55 +1,55 @@
 <hyper-content for="toolbar">
-  {{ showCtrl.resource_class.singular_human }} #{{ showCtrl.resource.id }}
+  {{ showController.resource_class.singular_human }} #{{ showController.resource.id }}
 </hyper-content>
 
 <hyper-content for="toolbar-right">
-  <md-button ui-sref="^.edit({ id: showCtrl.resource.id })">
+  <md-button ui-sref="^.edit({ id: showController.resource.id })">
     <md-icon md-svg-icon="editor:ic_mode_edit_24px" aria-label="Edit"></md-icon>
   </md-button>
-  <md-button class="md-warn" ui-sref="^.show({ id: showCtrl.resource.id })" delete-link>
+  <md-button class="md-warn" ui-sref="^.show({ id: showController.resource.id })" delete-link>
     <md-icon md-svg-icon="action:ic_delete_24px" aria-label="Delete"></md-icon>
   </md-button>
 </hyper-content>
 
-<dl ng-repeat="attribute in showCtrl.resource_class.show_attributes"
+<dl ng-repeat="attribute in showController.resource_class.show_attributes"
   layout="row" layout-margin>
   <dt flex="20">
     {{ attribute.human }}
   </dt>
   <dd flex>
-    <ng-include src="showCtrl.template(attribute)"></ng-include>
+    <ng-include src="showController.template(attribute)"></ng-include>
   </dd>
 </dl>
 
 <script type="text/ng-template" id="show-date">
-  {{ showCtrl.resource[attribute.key] | date:'longDate' }}
+  {{ showController.resource[attribute.key] | date:'longDate' }}
 </script>
 
 <script type="text/ng-template" id="show-datetime">
-  {{ showCtrl.resource[attribute.key] | date:'longDate' }}
-  {{ showCtrl.resource[attribute.key] | date:'mediumTime' }}
+  {{ showController.resource[attribute.key] | date:'longDate' }}
+  {{ showController.resource[attribute.key] | date:'mediumTime' }}
 </script>
 
 <script type="text/ng-template" id="show-email">
-  <a href="mailto:{{ showCtrl.resource[attribute.key] }}">
-    {{ showCtrl.resource[attribute.key] }}
+  <a href="mailto:{{ showController.resource[attribute.key] }}">
+    {{ showController.resource[attribute.key] }}
   </a>
 </script>
 
 <script type="text/ng-template" id="show-integer">
-  {{ showCtrl.resource[attribute.key] }}
+  {{ showController.resource[attribute.key] }}
 </script>
 
 <script type="text/ng-template" id="show-string">
-  {{ showCtrl.resource[attribute.key] }}
+  {{ showController.resource[attribute.key] }}
 </script>
 
 <script type="text/ng-template" id="show-text">
-  {{ showCtrl.resource[attribute.key] }}
+  {{ showController.resource[attribute.key] }}
 </script>
 
 <script type="text/ng-template" id="show-url">
-  <a href="{{ showCtrl.resource[attribute.key] }}" target="_blank">
-    {{ showCtrl.resource[attribute.key] }}
+  <a href="{{ showController.resource[attribute.key] }}" target="_blank">
+    {{ showController.resource[attribute.key] }}
   </a>
 </script>

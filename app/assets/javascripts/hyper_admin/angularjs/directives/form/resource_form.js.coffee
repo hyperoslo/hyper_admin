@@ -2,10 +2,10 @@ angular.module("hyperadmin")
   .directive "resourceForm", ->
     template: """
 <div class="row">
-  <div ng-controller="FormCtrl as formCtrl">
-    <form-errors errors="formCtrl.errors"></form-errors> 
+  <div ng-controller="FormController as formController">
+    <form-errors errors="formController.errors"></form-errors> 
 
-    <form name="form" ng-submit="formCtrl.submit()" novalidate>
+    <form name="form" ng-submit="formController.submit()" novalidate>
       <div ng-repeat="attr in resourceClass.form_attributes">
         <ng-include src='attr.type'></ng-include>
       </div>

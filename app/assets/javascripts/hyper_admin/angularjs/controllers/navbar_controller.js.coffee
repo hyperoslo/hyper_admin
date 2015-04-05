@@ -1,5 +1,5 @@
 angular.module("hyperadmin")
-  .controller "NavbarCtrl", (Restangular) ->
+  .controller "NavbarController", (Restangular) ->
     Restangular.all("admin/resource_classes").getList().then (resources) =>
       @resources = resources.map (resource) ->
         list_state: "#{resource.plural}"

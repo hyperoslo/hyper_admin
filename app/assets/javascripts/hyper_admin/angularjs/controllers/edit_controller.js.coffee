@@ -1,5 +1,5 @@
 angular.module("hyperadmin")
-  .controller "EditCtrl", ($state, resourceClass) ->
+  .controller "EditController", ($state, resourceClass) ->
     @resource_class = resourceClass
 
     this

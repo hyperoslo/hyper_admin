@@ -10,22 +10,22 @@
 
     <base href="/">
   </head>
-  <body layout="row" ng-controller="MainCtrl as mainCtrl">
+  <body layout="row" ng-controller="MainController as mainController">
 
     <md-sidenav layout="column" md-component-id="leftNav"
       md-is-locked-open="$mdMedia('gt-lg')"
       class="md-sidenav-left md-whiteframe-z1">
       <md-toolbar>
         <div class="md-toolbar-tools">
-          <a ui-sref="dashboard" ng-click="mainCtrl.toggleLeftNavigation()">Admin</a>
+          <a ui-sref="dashboard" ng-click="mainController.toggleLeftNavigation()">Admin</a>
         </div>
       </md-toolbar>
 
-      <ul id="main-navigation" ng-controller="NavbarCtrl as navbarCtrl">
-        <li ng-repeat="resource in navbarCtrl.resources">
+      <ul id="main-navigation" ng-controller="NavbarController as navbarController">
+        <li ng-repeat="resource in navbarController.resources">
           <md-button ui-sref="index({ pluralName: resource.list_state })"
             ui-sref-active="active"
-            ng-click="mainCtrl.toggleLeftNavigation()">
+            ng-click="mainController.toggleLeftNavigation()">
             {{ resource.label }}
           </md-button>
         </li>
@@ -36,7 +36,7 @@
       <md-toolbar>
         <div class="md-toolbar-tools">
           <md-button id="open-navigation-drawer-icon"
-            ng-click="mainCtrl.toggleLeftNavigation()" hide-gt-lg
+            ng-click="mainController.toggleLeftNavigation()" hide-gt-lg
             aria-label="Open navigation drawer">
             <md-icon md-svg-icon="navigation:ic_menu_24px"
               alt="Open navigation drawer"></md-icon>

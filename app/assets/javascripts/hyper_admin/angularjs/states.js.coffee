@@ -11,7 +11,7 @@ angular.module("hyperadmin")
         url: "/admin/:pluralName"
         templateUrl: (params) ->
           "/admin/#{params.pluralName}.html"
-        controller: "IndexCtrl as indexCtrl"
+        controller: "IndexController as indexController"
         resolve:
           resourceClass: ($stateParams, Restangular) ->
             Restangular.one("admin/resource_classes", $stateParams.pluralName).get()
@@ -21,21 +21,21 @@ angular.module("hyperadmin")
         url: "/new"
         templateUrl: (params) ->
           "/admin/#{params.pluralName}/new.html"
-        controller: "NewCtrl as newCtrl"
+        controller: "NewController as newController"
         data:
           mode: "new"
       .state "index.show",
         url: "/:id"
         templateUrl: (params) ->
           "/admin/#{params.pluralName}/#{params.id}.html"
-        controller: "ShowCtrl as showCtrl"
+        controller: "ShowController as showController"
         data:
           resource: "resource"
       .state "index.edit",
         url: "/:id/edit"
         templateUrl: (params) ->
           "/admin/#{params.pluralName}/#{params.id}/edit.html"
-        controller: "EditCtrl as editCtrl"
+        controller: "EditController as editController"
         data:
           resource: "resource"
           mode: "edit"

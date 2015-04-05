@@ -1,13 +1,13 @@
 <ui-view>
   <hyper-content for="toolbar">
-    All {{ indexCtrl.resource_class.plural }}
+    All {{ indexController.resource_class.plural }}
   </hyper-content>
 
   <hyper-content for="toolbar-right">
   </hyper-content>
 
-  <resource-table resource-class="indexCtrl.resource_class"
-    resources="indexCtrl.resources">
+  <resource-table resource-class="indexController.resource_class"
+    resources="indexController.resources">
   </resource-table>
 
   <md-button class="md-fab md-primary new-btn" ui-sref=".new">
