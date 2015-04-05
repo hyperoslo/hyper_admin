@@ -1,4 +1,10 @@
 HyperAdmin.register Article do
+  index do
+    column :id
+    column :title
+    column :published_at
+  end
+
   show do
     row :id
     row :title
@@ -9,5 +15,6 @@ HyperAdmin.register Article do
   form do
     field :title
     field :body
+    field :published_at
   end
 end
