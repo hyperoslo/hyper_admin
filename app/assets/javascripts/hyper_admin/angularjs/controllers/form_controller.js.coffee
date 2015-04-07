@@ -1,5 +1,5 @@
 angular.module("hyperadmin")
-  .controller "FormController", ($scope, $state, Restangular) ->
+  .controller "FormController", ($scope, $mdToast, $state, Restangular) ->
     @resource = { }
     mode = $state.current.data.mode
 
@@ -41,8 +41,10 @@ angular.module("hyperadmin")
       onSuccess = (resource) =>
         switch mode
           when "new"
+            $mdToast.showSimple "Saved successfully!"
             $scope.$emit "resource:created", resource
           when "edit"
+            $mdToast.showSimple "Updated successfully!"
             $scope.$emit "resource:updated", resource
 
         $state.go "^.show", id: resource.id
