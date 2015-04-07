@@ -39,6 +39,12 @@ angular.module("hyperadmin")
         @errors = prettifyErrors response.data
 
       onSuccess = (resource) =>
+        switch mode
+          when "new"
+            $scope.$emit "resource:created", resource
+          when "edit"
+            $scope.$emit "resource:updated", resource
+
         $state.go "^.show", id: resource.id
 
       if method == "post"
