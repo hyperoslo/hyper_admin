@@ -1,6 +1,6 @@
 angular.module("hyperadmin")
-  .controller "IndexController", ($scope, $location, $state, Restangular, resourceClass) ->
-    allPages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+  .controller "IndexController", ($scope, $location, $state, Restangular, resourceClass, resourcePages) ->
+    allPages = resourcePages
 
     @pagination =
       buttonsDisabled: false

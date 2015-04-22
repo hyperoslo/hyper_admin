@@ -15,6 +15,13 @@ angular.module("hyperadmin")
         resolve:
           resourceClass: ($stateParams, Restangular) ->
             Restangular.one("admin/resource_classes", $stateParams.pluralName).get()
+          resourcePages: ($http, $q, $stateParams) ->
+            deferred = $q.defer()
+
+            $http.get("admin/resource_classes/#{$stateParams.pluralName}/count.json")
+              .success (data) -> deferred.resolve(data.pages)
+
+            deferred.promise
         data:
           resource: "resource"
       .state "index.new",
