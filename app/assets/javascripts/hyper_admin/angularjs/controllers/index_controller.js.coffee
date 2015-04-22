@@ -1,9 +1,23 @@
 angular.module("hyperadmin")
   .controller "IndexController", ($scope, $location, $state, Restangular, resourceClass) ->
+    allPages = [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+
     @pagination =
       buttonsDisabled: false
       page: (parseInt($location.search().page) || 1)
-      pages: [ 1, 2, 3, 4, 5 ]
+      pages: ->
+        return allPages if allPages.length <= 5
+
+        current = @page
+
+        first = if current >= 5
+          allPages.slice (current - 5), (current - 1)
+        else
+          allPages.slice 0, (current - 1)
+
+        last = allPages.slice (current), (current + 4)
+
+        _.flatten [first, current, last]
 
     @resource_class = resourceClass
 
@@ -48,11 +62,17 @@ angular.module("hyperadmin")
 
     @disableNextPageButton = =>
       return true if @pagination.buttonsDisabled
-      @pagination.page >= _.max(@pagination.pages)
+      @pagination.page >= _.max(@pagination.pages())
 
     @disablePageButton = (number) =>
       return true if @pagination.buttonsDisabled
       number == @pagination.page
+
+    @showLeftDots = =>
+      @pagination.page > 5
+
+    @showRightDots = =>
+      @pagination.page < (_.max(allPages) - 4)
 
     @loadPage()
 
