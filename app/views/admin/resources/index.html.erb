@@ -12,19 +12,19 @@
 
   <nav class="pagination">
     <button class="md-button" ng-click="indexController.gotoPrevPage()"
-      ng-disabled="indexController.pagination.buttonsDisabled">
+      ng-disabled="indexController.disablePrevPageButton()">
       <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
     </button>
 
     <button class="md-button" ng-click="indexController.gotoPage(number)"
-      ng-disabled="indexController.pagination.buttonsDisabled"
+      ng-disabled="indexController.disablePageButton(number)"
       ng-repeat="number in indexController.pagination.pages">
       <span ng-class="{ active: indexController.pagination.page == number }"
         class="pageNumber">{{ number }}</span>
     </button>
 
     <button class="md-button" ng-click="indexController.gotoNextPage()"
-      ng-disabled="indexController.pagination.buttonsDisabled">
+      ng-disabled="indexController.disableNextPageButton()">
       <md-icon md-svg-icon="navigation:ic_arrow_forward_24px"></md-icon>
     </button>
   </nav>
