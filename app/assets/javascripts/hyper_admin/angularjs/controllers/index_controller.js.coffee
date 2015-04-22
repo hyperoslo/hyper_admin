@@ -30,8 +30,6 @@ angular.module("hyperadmin")
           return @resources[index] = resource
 
     @loadPage = (callback) =>
-      $location.search 'page', @pagination.page
-
       Restangular.all("admin/#{resourceClass.plural}")
         .getList(page: @pagination.page).then (resources) =>
           @resources = Restangular.stripRestangular resources
@@ -42,18 +40,24 @@ angular.module("hyperadmin")
       @pagination.buttonsDisabled = true
 
       @pagination.page--
+      $location.search 'page', @pagination.page
+
       @loadPage => @pagination.buttonsDisabled = false
 
     @gotoNextPage = =>
       @pagination.buttonsDisabled = true
 
       @pagination.page++
+      $location.search 'page', @pagination.page
+
       @loadPage => @pagination.buttonsDisabled = false
 
     @gotoPage = (page) =>
       @pagination.buttonsDisabled = true
 
       @pagination.page = page
+      $location.search 'page', @pagination.page
+
       @loadPage => @pagination.buttonsDisabled = false
 
     @disablePrevPageButton = =>
