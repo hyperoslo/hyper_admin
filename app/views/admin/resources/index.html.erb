@@ -12,7 +12,8 @@
 
   <nav class="pagination">
     <md-button ng-click="indexController.gotoPrevPage()"
-      ng-disabled="indexController.disablePrevPageButton()">
+      ng-disabled="indexController.disablePrevPageButton()"
+      aria-label="Go to previous page">
       <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
     </md-button>
 
@@ -20,7 +21,8 @@
 
     <md-button ng-click="indexController.gotoPage(number)"
       ng-disabled="indexController.disablePageButton(number)"
-      ng-repeat="number in indexController.pagination.pages()">
+      ng-repeat="number in indexController.pagination.pages()"
+      aria-label="Go to page {{ number }}">
       <span ng-class="{ active: indexController.pagination.page == number }"
         class="pageNumber">{{ number }}</span>
     </md-button>
@@ -28,7 +30,8 @@
     <span class="dots" ng-show="indexController.showRightDots()">&ctdot;</span>
 
     <md-button class="md-button" ng-click="indexController.gotoNextPage()"
-      ng-disabled="indexController.disableNextPageButton()">
+      ng-disabled="indexController.disableNextPageButton()"
+      aria-label="Go to next page">
       <md-icon md-svg-icon="navigation:ic_arrow_forward_24px"></md-icon>
     </md-button>
   </nav>
