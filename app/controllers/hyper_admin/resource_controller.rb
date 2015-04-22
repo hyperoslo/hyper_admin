@@ -4,7 +4,9 @@ module HyperAdmin
     before_action :permit_params, only: [ :create, :update ]
 
     def index
-      @resources = resource_class.all
+      page = params[:page] || 1
+
+      @resources = resource_class.page(page).per(25)
       render 'admin/resources/index'
     end
 

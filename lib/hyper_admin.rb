@@ -1,5 +1,6 @@
 require 'jbuilder'
 require 'jquery-rails'
+require 'kaminari'
 require 'responders'
 
 require 'hyper_admin/engine'

@@ -18,6 +18,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'coffee-rails', '~> 4.1'
   gem.add_dependency 'jbuilder', '~> 2.2'
   gem.add_dependency 'jquery-rails', '~> 4.0'
+  gem.add_dependency 'kaminari', '~> 0.16'
   gem.add_dependency 'rails', '~> 4.2'
   gem.add_dependency 'responders', '~> 2.1'
   gem.add_dependency 'sass-rails', '~> 5.0'
