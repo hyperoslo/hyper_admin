@@ -18,6 +18,8 @@ module HyperAdmin
       count = find_resource_class.resource_class.count
       page_count = count / 25
 
+      page_count = 1 if page_count == 0
+
       @pages = (1..page_count).to_a
     end
 
