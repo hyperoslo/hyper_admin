@@ -29,6 +29,9 @@ angular.module("hyperadmin")
         if res.id == resource.id
           return @resources[index] = resource
 
+    $scope.$on "resource:deleted", (event, resource) =>
+      @loadPage()
+
     @loadPage = (callback) =>
       Restangular.all("admin/#{resourceClass.plural}")
         .getList(page: @pagination.page).then (resources) =>

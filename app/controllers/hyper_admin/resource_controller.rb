@@ -56,7 +56,7 @@ module HyperAdmin
 
       @resource.destroy
 
-      head 200
+      render json: @resource
     end
 
     def resource
