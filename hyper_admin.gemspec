@@ -25,6 +25,7 @@ Gem::Specification.new do |gem|
 
   gem.add_development_dependency 'coveralls', '~> 0.7'
   gem.add_development_dependency 'factory_girl_rails', '~> 4.5'
+  gem.add_development_dependency 'faker', '~> 1.4'
   gem.add_development_dependency 'guard-rspec', '~> 4.5'
   gem.add_development_dependency 'pry-rails', '~> 0.3'
   gem.add_development_dependency 'rspec-rails', '~> 3.2'
