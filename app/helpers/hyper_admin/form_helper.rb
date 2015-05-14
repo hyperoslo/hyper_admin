@@ -8,6 +8,7 @@ module HyperAdmin
     TRANSLATIONS = {
       presence: {required: true},
       length: ->(v) {
+	      # todo: account for constraints :in/:within and :is
         h = {}
         h['ng-minlength'] = v.options[:minimum] if v.options[:minimum]
         h['ng-maxlength'] = v.options[:maximum] if v.options[:maximum]
