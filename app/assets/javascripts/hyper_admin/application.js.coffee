@@ -8,6 +8,7 @@
 #= require lodash
 #= require restangular
 #= require angular-material
+#= require paginate-anything
 #= require hyper-content-for
 #= require ./angularjs/config
 #= require_tree ./angularjs

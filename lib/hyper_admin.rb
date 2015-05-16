@@ -1,3 +1,4 @@
+require 'clean_pagination'
 require 'jbuilder'
 require 'jquery-rails'
 require 'kaminari'

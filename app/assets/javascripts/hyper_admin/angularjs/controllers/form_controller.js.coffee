@@ -42,10 +42,8 @@ angular.module("hyperadmin")
         switch mode
           when "new"
             $mdToast.showSimple "Saved successfully!"
-            $scope.$emit "resource:created", resource
           when "edit"
             $mdToast.showSimple "Updated successfully!"
-            $scope.$emit "resource:updated", resource
 
         $state.go "^.show", id: resource.id
 

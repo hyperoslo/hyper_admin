@@ -1,13 +1,17 @@
 module HyperAdmin
   class ResourceController < ApplicationController
+    include CleanPagination
+
     before_action :set_resource_class
     before_action :permit_params, only: [ :create, :update ]
 
     def index
-      page = params[:page] || 1
+      max_per_page = 25
 
-      @resources = resource_class.page(page).per(25)
-      render 'admin/resources/index'
+      paginate resource_class.count, max_per_page do |limit, offset|
+        @resources = resource_class.limit(limit).offset(offset)
+        render 'admin/resources/index'
+      end
     end
 
     def show

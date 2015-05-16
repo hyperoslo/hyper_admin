@@ -29,7 +29,6 @@ angular.module("hyperadmin")
                 $mdDialog.hide()
 
                 $mdToast.showSimple "Deleted successfully!"
-                scope.$emit "resource:deleted", response.data
 
                 $state.go "index"
 

@@ -22,6 +22,7 @@ Gem::Specification.new do |gem|
   gem.add_dependency 'rails', '~> 4.2'
   gem.add_dependency 'responders', '~> 2.1'
   gem.add_dependency 'sass-rails', '~> 5.0'
+  gem.add_dependency 'clean_pagination', '~> 0.0.9'
 
   gem.add_development_dependency 'coveralls', '~> 0.7'
   gem.add_development_dependency 'factory_girl_rails', '~> 4.5'

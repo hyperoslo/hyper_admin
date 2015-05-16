@@ -10,31 +10,49 @@
     resources="indexController.resources">
   </resource-table>
 
-  <nav class="pagination">
-    <md-button ng-click="indexController.gotoPrevPage()"
-      ng-disabled="indexController.disablePrevPageButton()"
-      aria-label="Go to previous page">
-      <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
-    </md-button>
+  <bgf-pagination
+    collection="indexController.resources"
+    url="indexController.resourceUrl"
+    template-url="material-pagination">
+  </bgf-pagination>
 
-    <span class="dots" ng-show="indexController.showLeftDots()">&ctdot;</span>
+  <script type="text/ng-template" id="material-pagination">
+    <div class="paginate-anything">
+      <nav class="pagination" ng-if="numPages > 1">
+        <md-button ng-click="gotoPage(page-1)" ng-disabled="page <= 0"
+          aria-label="Go to previous page">
+          <md-icon md-svg-icon="navigation:ic_arrow_back_24px"></md-icon>
+        </md-button>
 
-    <md-button ng-click="indexController.gotoPage(number)"
-      ng-disabled="indexController.disablePageButton(number)"
-      ng-repeat="number in indexController.pagination.pages()"
-      aria-label="Go to page {{ number }}">
-      <span ng-class="{ active: indexController.pagination.page == number }"
-        class="pageNumber">{{ number }}</span>
-    </md-button>
+        <md-button ng-if="linkGroupFirst() > 0" ng-click="gotoPage(0)">
+          <span class="pageNumber">1</span>
+        </md-button>
 
-    <span class="dots" ng-show="indexController.showRightDots()">&ctdot;</span>
+        <span class="dots" ng-if="linkGroupFirst() > 1">&ctdot;</span>
 
-    <md-button class="md-button" ng-click="indexController.gotoNextPage()"
-      ng-disabled="indexController.disableNextPageButton()"
-      aria-label="Go to next page">
-      <md-icon md-svg-icon="navigation:ic_arrow_forward_24px"></md-icon>
-    </md-button>
-  </nav>
+        <md-button
+          ng-repeat="p in [linkGroupFirst(), linkGroupLast()] | makeRange"
+          ng-click="gotoPage(p)" ng-disabled="p === page"
+          aria-label="Go to page {{ p }}">
+          <span ng-class="{ active: p === page }"
+            class="pageNumber">{{ p + 1 }}</span>
+        </md-button>
+
+        <span class="dots" ng-if="linkGroupLast() < numPages - 2">&ctdot;</span>
+
+        <md-button ng-if="isFinite() && linkGroupLast() < numPages - 1"
+          ng-click="gotoPage(numPages - 1)">
+          <span class="pageNumber">{{ numPages }}</span>
+        </md-button>
+
+        <md-button class="md-button" ng-click="gotoPage(page + 1)"
+          ng-disabled="indexController.disableNextPageButton()"
+          aria-label="Go to next page">
+          <md-icon md-svg-icon="navigation:ic_arrow_forward_24px"></md-icon>
+        </md-button>
+      </nav>
+    </div>
+  </script>
 
   <md-button class="md-fab md-primary new-btn" ui-sref=".new">
     <md-icon md-svg-icon="content:ic_add_24px" aria-label="Create new"></md-icon>
