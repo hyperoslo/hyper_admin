@@ -28,3 +28,8 @@ angular.module("hyperadmin", [ "ngAnimate", "ngAria", "ngMessages", "ngMaterial"
       .iconSet 'notification',   '<%= image_path "hyper_admin/icons/material/svg-sprite-notification.svg" %>'
       .iconSet 'social',         '<%= image_path "hyper_admin/icons/material/svg-sprite-social.svg" %>'
       .iconSet 'toggle',         '<%= image_path "hyper_admin/icons/material/svg-sprite-toggle.svg" %>'
+
+  .config ($mdThemingProvider) ->
+    $mdThemingProvider.theme "default"
+      .primaryPalette "deep-orange"
+      .accentPalette "indigo"
