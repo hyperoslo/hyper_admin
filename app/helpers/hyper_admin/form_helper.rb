@@ -2,23 +2,64 @@
 
 module HyperAdmin
   module ValidationHelper
-    # The keys of this Hash are Symbols identifying a type of Rails validation.
-    # Values may be either a literal Hash or a lambda which returns a Hash. The Hash
-    # contains HTML attributes (including :content) and keys may be either String or Symbol.
+
+    # This Hash defines the mappings from Rails validations to their corresponding
+	  # AngularJS directives and HTML attributes. It follows a unique but simple contract.
+	  #
+    # KEYS [Symbol] Identifiers of validations one would pass to the `validates` method
+	  #   in an Active Record model file.
+	  # VALUES [Array(String, Hash)] Array containing the identifier of equivalent AngularJS
+	  #   validation directive, followed by an HTML attributes hash for its implementation.
+	  #   Multiple directive identifiers may be specified by separating them with commas.
+	  # VALUES [Proc] A lambda or Proc may be given instead, but it must evaluate to an
+	  #   Array of the same format as previously described when called.
+	  #
+	  # Using a Proc allows for arbitrary transformation of the Rails validation data
+	  #
     TRANSLATIONS = {
-      presence: {required: true},
+      presence: ['required', {required: true}],
       length: ->(v) {
-	      # todo: account for constraints :in/:within and :is
-        h = {}
-        h['ng-minlength'] = v.options[:minimum] if v.options[:minimum]
-        h['ng-maxlength'] = v.options[:maximum] if v.options[:maximum]
-        h
+	      # todo: implement support for :wrong_length, :too_long, and :too_short
+	      # todo: implement support for %{count} placeholder
+	      # todo: implement support for tokenizer
+	      # todo: implement support for :only_integer
+	      # todo: oh god when do these options end
+        case
+	        when v.options.key?(:minimum)
+		        ['minlength', {'ng-minlength' => v.options[:minimum]}]
+	        when v.options.key?(:maximum)
+		        ['maxlength', {'ng-maxlength' => v.options[:maximum]}]
+	        when v.options.key?(:in) || v.options.key?(:within)
+		        range = v.options[:in] || v.options[:within]
+		        ['minlength,maxlength', {'ng-minlength' => range.min, 'ng-maxlength' => range.max}]
+	        when v.options.key?(:is)
+		        ['minlength,maxlength', {'ng-minlength' => v.options[:is], 'ng-maxlength' => v.options[:is]}]
+        end
       },
-      format: ->(v) { {pattern: v.options[:with].source} }
+	    # todo: consider implementing support for :without option
+      format: ->(v) { ['pattern', {pattern: v.options[:with].source}] }
     }
+
+	  # This helper facilitates access to data in the TRANSLATIONS Hash, returning one or both of:
+    #
+	  # @return [Array<String>] Collection of one or more AngularJS validation directive names
+	  # @return [Hash{Symbol, String => String}] Hash of HTML attributes representing AngularJS
+    #   implementation of the validation (directives)
+    def translate_rails_validation(validation, output = {})
+	    angular_output = TRANSLATIONS[validation.kind]
+	    resolved_data = angular_output.respond_to?(:call) ? angular_output.call(validation) : angular_output
+	    case output
+		    when {into: :angular_validations} then resolved_data.first.split(',')
+		    when {into: :angular_directives}  then resolved_data.last
+			  when {}                           then resolved_data
+	    end
+    end
+
   end
 
   module FormHelper
+	  include ValidationHelper
+
     # This data is used by view helpers to generate the HTML comprising form elements
     BASE_ATTRIBUTES = {
       class:       'form-control',
@@ -53,27 +94,43 @@ module HyperAdmin
       field_type = infer_type_from_attribute attribute
       attr_hash = FORM_FIELD_ATTRIBUTES[field_type.to_sym]
 
-      @resource._validators[attribute].each do |validation|
-        output = HyperAdmin::ValidationHelper::TRANSLATIONS[validation.kind]
-        attr_hash.update(output.respond_to?(:call) ? output.call(validation) : output)
+      @resource._validators[attribute].each do |v|
+        attr_hash.update translate_rails_validation(v, into: :angular_directives)
       end
 
       tag :input, options.merge(attr_hash)
     end
 
-    # Returns the error message for a given `HyperAdmin::Resource` attribute as declared in
-    # the associated Rails model via the `message` validation option. If no message is given,
+    # Returns a collection of all error messages for given `HyperAdmin::Resource` attribute,
+    # based on the validations declared in the associated Rails model. The data is returned
+    # as a Hash whose keys are AngularJS directives corresponding to the Rails validations.
+    #
+    # If no message is given,
     # a Hash of default error messages is checked to see if one exists for the attribute type.
-    def error_message_for(attribute)
+    #
+    # @param [Symbol] attribute Name of an attribute on an `ActiveRecord::Base` descendant
+    def error_messages_for(attribute)
       if @resource._validators[attribute].empty?
-        DEFAULT_ERROR_MESSAGES[infer_type_from_attribute attribute] || ''
+	      # todo: should do testing to confirm this always produces valid directive names...
+	      type = infer_type_from_attribute attribute
+        {type => DEFAULT_ERROR_MESSAGES[type] || ''}
       else
-        @resource._validators[attribute].first.options[:message]
+	      # All validations with messages are collected, and converted one-by-one into corresponding
+	      # AngularJS directives along with their messages. This type of iteration is necessary
+	      # because some Rails validations result in multiple AngularJS directives being produced
+	      # (:length, for example) but each attribute only has one message (for now).
+        @resource._validators[attribute].keep_if { |v| v.options.key? :message }.inject({}) do |out, validation|
+		      translate_rails_validation(validation, into: :angular_validations).each do |directive|
+			      out[directive] = validation.options[:message]
+		      end
+	        out
+	      end
       end
     end
 
     def infer_type_from_attribute(attr)
       @resource_class.columns_hash[attr.to_s].type
     end
+
   end
 end

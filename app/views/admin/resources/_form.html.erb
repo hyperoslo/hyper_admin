@@ -4,8 +4,8 @@
       <label>{{ attr.human }}</label>
       <%= field_with_validations_for attr %>
       <ng-messages for="form[attr.key].$error">
-        <% for error, msg in error_messages_for attr %>
-          <ng-message when="<%= error %>"><%= msg %></ng-message>
+        <% for validation, msg in error_messages_for attr %>
+          <ng-message when="<%= validation %>"><%= msg %></ng-message>
         <% end %>
       </ng-messages>
     </md-input-container>
