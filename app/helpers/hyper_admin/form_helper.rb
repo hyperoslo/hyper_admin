@@ -30,7 +30,7 @@ module HyperAdmin
 
     # NOTE: The following methods assume the context is an instance of `HyperAdmin::ResourceController`
 
-    # Generates `input` tag HTML for a `HyperAdmin::Resource` attribute, and is composed from:
+    # Generates {input} tag HTML for a {HyperAdmin::Resource} attribute, and is composed from:
     # - Pre-defined attributes representing an AngularJS form control for given attribute type
     # - Attributes defining AngularJS validations, translated from those declared in the Rails model
     # - Arbitrary attributes Hash passed to the helper
@@ -39,35 +39,34 @@ module HyperAdmin
       attr_hash = FORM_FIELD_ATTRIBUTES[field_type.to_sym]
 
       @resource._validators[attribute].each do |v|
-        attr_hash.update translate_rails_validation(v, into: :angular_directives)
+        attr_hash.update angularjs_html_for v
       end
 
       tag :input, options.merge(attr_hash)
     end
 
-    # Returns a collection of all error messages for given `HyperAdmin::Resource` attribute,
-    # based on the validations declared in the associated Rails model. The data is returned
-    # as a Hash whose keys are AngularJS directives corresponding to the Rails validations.
+    # @param attribute [Symbol] Name of a {HyperAdmin::Resource} attribute in an {ActiveRecord} model
+    # @return [Hash{Symbol=>String}] Collection of error data representing all validations for given
+    #   attribute which have a message specified in the Rails model, as:
     #
-    # If no message is given,
-    # a Hash of default error messages is checked to see if one exists for the attribute type.
+    #   KEY: an AngularJS validator identifier representing a key on some {ngModel.$error} object
+    #   VALUE: message to display when validation is in error state (normally hidden)
     #
-    # @param [Symbol] attribute Name of an attribute on an `ActiveRecord::Base` descendant
-    def error_messages_for(attribute)
+    def errors_with_messages_for(attribute)
+      # If an attribute has NO validations, then it is assigned a default error message
+      # from {DEFAULT_ERROR_MESSAGES} for corresponding input field, if one exists.
       if @resource._validators[attribute].empty?
-        # todo: should do testing to confirm this always produces valid directive names...
+        # todo: add tests to confirm this always produces valid error identifier...
         type = infer_type_from_attribute attribute
         {type => DEFAULT_ERROR_MESSAGES[type] || ''}
       else
-        # All validations with messages are collected, and converted one-by-one into corresponding
-        # AngularJS directives along with their messages. This type of iteration is necessary
-        # because some Rails validations result in multiple AngularJS directives being produced
-        # (:length, for example) but each attribute only has one message (for now).
-        @resource._validators[attribute].keep_if { |v| v.options.key? :message }.inject({}) do |out, validation|
-          translate_rails_validation(validation, into: :angular_validations).each do |directive|
-            out[directive] = validation.options[:message]
+        # Some validations (such as :length) may correspond to multiple AngularJS directives,
+        # so the error message must be assigned to each error returned from {TRANSLATIONS}.
+        @resource._validators[attribute].keep_if { |v| v.options.key? :message }.inject({}) do |h, validation|
+          angularjs_errors_for(validation).each do |directive|
+            h[directive] = validation.options[:message]
           end
-          out
+          h
         end
       end
     end
