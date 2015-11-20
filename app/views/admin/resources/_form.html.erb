@@ -1,80 +1,13 @@
-<script type="text/ng-template" id="date">
-  <md-input-container>
-    <label>{{ attr.human }}</label>
-    <input class="form-control" name="{{ attr.key }}" type="date"
-      placeholder="{{ attr.placeholder }}" ng-model="formController.resource[attr.key]">
-    <ng-messages for="form[attr.key].$error">
-      <ng-message when="date">
-        Please input a date in the format
-        <em>yyyy</em>-<em>mm</em>-<em>dd</em>
-      </ng-message>
-    </ng-messages>
-  </md-input-container>
-</script>
-
-<script type="text/ng-template" id="datetime">
-  <md-input-container>
-    <label>{{ attr.human }}</label>
-    <input class="form-control" name="{{ attr.key }}" type="datetime-local"
-      placeholder="{{ attr.placeholder }}" ng-model="formController.resource[attr.key]">
-    <ng-messages for="form[attr.key].$error">
-      <ng-message when="datetimelocal">
-        Please input a date and time in the formain the format
-          <em>yyyy</em>-<em>mm</em>-<em>dd</em>T<em>hh</em>:<em>mm</em>:<em>ss</em>
-      </ng-message>
-    </ng-messages>
-  </md-input-container>
-</script>
-
-<script type="text/ng-template" id="email">
-  <md-input-container>
-    <label>{{ attr.human }}</label>
-    <input class="form-control" name="{{ attr.key }}" type="email"
-      placeholder="{{ attr.placeholder }}" ng-model="formController.resource[attr.key]">
-    <ng-messages for="form[attr.key].$error">
-      <ng-message when="email">Please input a valid e-mail address</ng-message>
-    </ng-messages>
-  </md-input-container>
-</script>
-
-<script type="text/ng-template" id="integer">
-  <md-input-container>
-    <label>{{ attr.human }}</label>
-    <input class="form-control" name="{{ attr.key }}" type="number"
-      placeholder="{{ attr.placeholder }}" ng-model="formController.resource[attr.key]" step="1">
-    <ng-messages for="form[attr.key].$error">
-      <ng-message when="number">Please input a valid number</ng-message>
-    </ng-messages>
-  </md-input-container>
-</script>
-
-<script type="text/ng-template" id="string">
-  <md-input-container>
-    <label>{{ attr.human }}</label>
-    <input class="form-control" name="{{ attr.key }}" type="text"
-      placeholder="{{ attr.placeholder }}" ng-model="formController.resource[attr.key]">
-    <ng-messages for="form[attr.key].$error">
-    </ng-messages>
-  </md-input-container>
-</script>
-
-<script type="text/ng-template" id="text">
-  <md-input-container>
-    <label>{{ attr.human }}</label>
-    <textarea class="form-control" name="{{ attr.key }}" placeholder="{{ attr.placeholder }}"
-      ng-model="formController.resource[attr.key]"></textarea>
-    <ng-messages for="form[attr.key].$error">
-    </ng-messages>
-  </md-input-container>
-</script>
-
-<script type="text/ng-template" id="url">
-  <md-input-container>
-    <label>{{ attr.human }}</label>
-    <input class="form-control" name="{{ attr.key }}" type="url"
-      placeholder="{{ attr.placeholder }}" ng-model="formController.resource[attr.key]">
-    <ng-messages for="form[attr.key].$error">
-      <ng-message when="url">Please input a valid URL</ng-message>
-    </ng-messages>
-  </md-input-container>
-</script>
+<% @attributes.keys.map(&:to_sym).each do |attr| %>
+  <script type="text/ng-template" id="<%= attr %>">
+    <md-input-container>
+      <label>{{ attr.human }}</label>
+      <%= field_with_validations_for attr %>
+      <ng-messages for="form[attr.key].$error">
+        <% for validation, msg in errors_with_messages_for attr %>
+          <ng-message when="<%= validation %>"><%= msg %></ng-message>
+        <% end %>
+      </ng-messages>
+    </md-input-container>
+  </script>
+<% end %>

@@ -7,7 +7,7 @@ angular.module("hyperadmin")
 
     <form name="form" ng-submit="formController.submit()" novalidate>
       <div ng-repeat="attr in resourceClass.form_attributes">
-        <ng-include src='attr.type'></ng-include>
+        <ng-include src='attr.key'></ng-include>
       </div>
 
       <form-actions form="form" cancel-state="resourceClass.plural">
